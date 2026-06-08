@@ -1,0 +1,110 @@
+.hs {
+  background: var(--navy);
+  padding: 80px 52px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  align-items: start;
+}
+
+/* ── Left ── */
+.hs__left {
+  padding-right: 52px;
+  border-right: 0.5px solid rgba(255, 255, 255, 0.08);
+}
+
+.hs__tag {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.hs__tag-line {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: var(--orange);
+}
+
+.hs__tag-text {
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: var(--orange);
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.hs__heading {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 18px;
+}
+
+.hs__body {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.48);
+  line-height: 1.85;
+  margin-bottom: 28px;
+}
+
+.hs__btn {
+  display: inline-block;
+  background: var(--red);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 12px 24px;
+  transition: background 0.2s ease;
+}
+
+.hs__btn:hover { background: #a8212a; }
+
+/* ── Right ── */
+.hs__right {
+  padding-left: 52px;
+}
+
+.hs__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.hs__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.62);
+  padding: 16px 0;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.07);
+  font-weight: 400;
+}
+
+.hs__item:last-child { border-bottom: none; }
+
+.hs__dot {
+  width: 6px;
+  height: 6px;
+  background: var(--orange);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .hs { grid-template-columns: 1fr; padding: 60px 32px; }
+  .hs__left  { padding-right: 0; border-right: none; border-bottom: 0.5px solid rgba(255,255,255,0.08); padding-bottom: 40px; margin-bottom: 40px; }
+  .hs__right { padding-left: 0; }
+}
+
+@media (max-width: 768px) {
+  .hs { padding: 48px 20px; }
+  .hs__heading { font-size: 24px; }
+}

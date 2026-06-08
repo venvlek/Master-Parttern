@@ -1,0 +1,131 @@
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ── Visual (left) ── */
+.about__visual {
+  position: relative;
+  min-height: 520px;
+  overflow: hidden;
+}
+
+.about__grid {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Content (right) ── */
+.about__content {
+  background: var(--white);
+  padding: 72px 52px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about__tag {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.about__tag-line {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+
+.about__tag-text {
+  font-size: 8px;
+  letter-spacing: 3.5px;
+  color: var(--orange);
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.about__heading {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1.18;
+  letter-spacing: -0.5px;
+  margin-bottom: 20px;
+}
+
+.about__heading em {
+  color: var(--red);
+  font-style: italic;
+}
+
+.about__body {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.9;
+  margin-bottom: 28px;
+}
+
+.about__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.about__list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.about__check {
+  width: 20px;
+  height: 20px;
+  background: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.about__check svg {
+  width: 10px;
+  height: 10px;
+}
+
+.about__btn {
+  display: inline-block;
+  background: var(--red);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 13px 26px;
+  width: fit-content;
+  transition: background 0.2s ease;
+}
+
+.about__btn:hover { background: #a8212a; }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .about { grid-template-columns: 1fr; }
+  .about__visual  { min-height: 320px; }
+  .about__content { padding: 52px 28px; }
+}
+
+@media (max-width: 768px) {
+  .about__heading { font-size: 26px; }
+  .about__content { padding: 44px 20px; }
+}

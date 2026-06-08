@@ -1,0 +1,58 @@
+/* ================================================================
+   GLOBALS — Masterpattern Nig. Ltd.
+   Brand: Red #C0272D | Navy #0B1F3B | Orange #E8781A
+   Fonts: Playfair Display (headings) | DM Sans (body)
+================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* ── Brand Colors ── */
+  --bg:        #F2EFE9;
+  --bg-2:      #FAFAF7;
+  --white:     #FFFFFF;
+  --navy:      #0B1F3B;
+  --navy-2:    #0D2444;
+  --red:       #C0272D;
+  --orange:    #E8781A;
+  --dark:      #060D1A;
+  --muted:     #7A7872;
+  --border:    rgba(11, 31, 59, 0.10);
+  --border-sm: rgba(11, 31, 59, 0.06);
+
+  /* ── Typography ── */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, -apple-system, sans-serif;
+
+  /* ── Navbar heights (used in Hero padding-top) ── */
+  --navbar-h:        71px;
+  --navbar-h-mobile: 63px;
+
+  /* ── Z-index scale ── */
+  --z-nav: 1000;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--navbar-h);
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-2);
+  color: var(--navy);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img, svg { max-width: 100%; display: block; }
+button   { cursor: pointer; font-family: var(--font-body); }
+a        { text-decoration: none; color: inherit; }
+ul       { list-style: none; }

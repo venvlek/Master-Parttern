@@ -1,0 +1,492 @@
+/* ================================================================
+   HERO.CSS — Masterpattern Nig. Ltd.
+   Includes: slideshow mode + main (3D) mode
+================================================================ */
+
+/* ── Section wrapper ─────────────────────────────────────────── */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  padding-top: 83px;
+  background: var(--bg-2);
+  overflow: hidden;
+  position: relative;
+}
+
+/* ════════════════════════════════════════════════════════════
+   SLIDESHOW BACKGROUND
+   Absolutely positioned — sits behind both grid columns.
+   The grid columns (text + 3D) stack on top of it.
+════════════════════════════════════════════════════════════ */
+
+.hero__slide-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;        /* behind the grid children (z-index: 2) */
+  overflow: hidden;
+}
+
+.hero__slide-bg--hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+
+/* Image / video fills the full hero */
+.hero__slide-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* Ken-Burns-style zoom-in on each new slide */
+  animation: slideKenBurns 10s ease-out forwards;
+}
+
+@keyframes slideKenBurns {
+  from { transform: scale(1.06); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+/* Dark overlay — makes text readable over bright media */
+.hero__slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(6, 13, 26, 0.70) 0%,    /* darker on text side */
+    rgba(6, 13, 26, 0.45) 100%   /* lighter on right */
+  );
+}
+
+/* ── Slideshow Controls ─────────────────────────────────────── */
+.hero__slide-controls {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  z-index: 10;
+  width: 90%;
+  max-width: 520px;
+}
+
+/* Dots */
+.hero__slide-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.hero__slide-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: all 0.35s ease;
+}
+
+.hero__slide-dot--active {
+  background: var(--orange);
+  width: 24px;
+  border-radius: 4px;
+}
+
+.hero__slide-dot--done {
+  background: rgba(255, 255, 255, 0.65);
+}
+
+/* Progress bar (images only) */
+.hero__slide-bar {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.hero__slide-bar-fill {
+  height: 100%;
+  background: var(--orange);
+  border-radius: 1px;
+  transition: width 0.08s linear;
+}
+
+/* Skip button */
+.hero__slide-skip {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  color: rgba(255, 255, 255, 0.55);
+  background: none;
+  border: 0.5px solid rgba(255, 255, 255, 0.22);
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.hero__slide-skip:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ════════════════════════════════════════════════════════════
+   LEFT SIDE — Text content (z-index 2, always above slideshow)
+════════════════════════════════════════════════════════════ */
+
+.hero__left {
+  padding: 80px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;          /* above hero__slide-bg */
+}
+
+/* "MP" Watermark */
+.hero__watermark {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: 220px;
+  font-weight: 900;
+  color: rgba(11, 31, 59, 0.025);
+  line-height: 1;
+  letter-spacing: -8px;
+  pointer-events: none;
+  user-select: none;
+  transition: color 0.5s ease;
+}
+
+/* Eyebrow */
+.hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 26px;
+  animation: heroFadeUp 0.65s ease 0.10s both;
+}
+
+.hero__eyebrow-line {
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+
+.hero__eyebrow-text {
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--orange);
+  font-weight: 700;
+  font-family: monospace;
+}
+
+/* Headline */
+.hero__title {
+  line-height: 0.88;
+  margin-bottom: 28px;
+  letter-spacing: -2px;
+  animation: heroFadeUp 0.65s ease 0.20s both;
+}
+
+.hero__title--stroke,
+.hero__title--solid,
+.hero__title--red {
+  font-family: var(--font-display);
+  font-size: 72px;
+  font-weight: 900;
+  display: block;
+  transition: color 0.5s ease, -webkit-text-stroke-color 0.5s ease;
+}
+
+.hero__title--stroke {
+  -webkit-text-stroke: 2px rgba(11, 31, 59, 0.38);
+  color: transparent;
+}
+
+.hero__title--solid { color: var(--navy); }
+.hero__title--red   { color: var(--red);  }
+
+.hero__title--sm {
+  font-size: 40px;
+  letter-spacing: -0.5px;
+  margin-top: 8px;
+}
+
+/* Subheadline */
+.hero__sub {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.85;
+  max-width: 420px;
+  margin-bottom: 38px;
+  font-weight: 400;
+  animation: heroFadeUp 0.65s ease 0.30s both;
+  transition: color 0.5s ease;
+}
+
+/* CTA Buttons */
+.hero__btns {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  animation: heroFadeUp 0.65s ease 0.40s both;
+}
+
+.hero__btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 15px 30px;
+  border: 0.5px solid transparent;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+}
+
+.hero__btn:active { transform: scale(0.97); }
+
+.hero__btn--primary {
+  background: var(--red);
+  color: #fff;
+  border-color: var(--red);
+}
+
+.hero__btn--primary:hover {
+  background: #a8212a;
+  border-color: #a8212a;
+}
+
+.hero__btn--outline {
+  background: transparent;
+  color: var(--navy);
+  border-color: var(--border);
+  transition: background 0.2s ease, color 0.25s ease, border-color 0.25s ease, transform 0.1s ease;
+}
+
+.hero__btn--outline:hover {
+  background: rgba(11, 31, 59, 0.05);
+}
+
+/* Location Badge */
+.hero__badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: heroFadeUp 0.65s ease 0.50s both;
+}
+
+.hero__badge-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--orange);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.hero__badge-text {
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  color: rgba(11, 31, 59, 0.32);
+  font-family: monospace;
+  transition: color 0.5s ease;
+}
+
+/* ════════════════════════════════════════════════════════════
+   RIGHT SIDE — Three.js 3D canvas
+════════════════════════════════════════════════════════════ */
+
+.hero__right {
+  position: relative;
+  background: var(--bg);
+  overflow: hidden;
+  z-index: 2;
+  transition: opacity 1s ease;
+}
+
+/* Blueprint grid overlay */
+.hero__grid {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(0deg,   transparent, transparent 27px, rgba(11,31,59,0.04) 28px),
+    repeating-linear-gradient(90deg,  transparent, transparent 27px, rgba(11,31,59,0.04) 28px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Corner marks */
+.hero__corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+
+.hero__corner--tl { top: 20px;    left: 20px;  border-left: 2px solid var(--orange); border-top:    2px solid var(--orange); }
+.hero__corner--tr { top: 20px;    right: 20px; border-right: 2px solid var(--orange); border-top:    2px solid var(--orange); }
+.hero__corner--bl { bottom: 20px; left: 20px;  border-left: 2px solid var(--orange); border-bottom: 2px solid var(--orange); }
+.hero__corner--br { bottom: 20px; right: 20px; border-right: 2px solid var(--orange); border-bottom: 2px solid var(--orange); }
+
+/* Three.js canvas */
+.hero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 1;
+}
+
+/* GPS label */
+.hero__coords {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  font-family: monospace;
+  color: rgba(11, 31, 59, 0.28);
+  letter-spacing: 2px;
+  white-space: nowrap;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+
+/* ════════════════════════════════════════════════════════════
+   SLIDESHOW MODE  (.hero--slideshow)
+   The background media is visible.
+   Text colors flip to white. The 3D panel is hidden.
+════════════════════════════════════════════════════════════ */
+
+/* Hide the 3D panel */
+.hero--slideshow .hero__right {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Fade out the watermark (it fights the overlay) */
+.hero--slideshow .hero__watermark {
+  color: rgba(255, 255, 255, 0.03);
+}
+
+/* Text → white on dark overlay */
+.hero--slideshow .hero__title--solid {
+  color: #ffffff;
+}
+
+.hero--slideshow .hero__title--stroke {
+  -webkit-text-stroke-color: rgba(255, 255, 255, 0.55);
+}
+
+/* Red stays red — it reads fine on dark */
+
+.hero--slideshow .hero__sub {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.hero--slideshow .hero__badge-text {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* Outline button → white border on dark bg */
+.hero--slideshow .hero__btn--outline {
+  color: rgba(255, 255, 255, 0.85);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.hero--slideshow .hero__btn--outline:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ════════════════════════════════════════════════════════════
+   MAIN MODE  (.hero--main)
+   3D panel fades in, text returns to dark colours.
+════════════════════════════════════════════════════════════ */
+
+.hero--main .hero__right {
+  opacity: 1;
+}
+
+/* ════════════════════════════════════════════════════════════
+   ANIMATIONS
+════════════════════════════════════════════════════════════ */
+
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ════════════════════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1280px) {
+  .hero__title--stroke,
+  .hero__title--solid,
+  .hero__title--red { font-size: 62px; }
+  .hero__title--sm  { font-size: 36px; }
+  .hero__sub        { font-size: 13px; max-width: 380px; }
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-top: 71px;
+  }
+  .hero__left  { order: 1; padding: 64px 32px 44px; }
+  .hero__right { order: 2; height: 420px; }
+
+  .hero__title--stroke,
+  .hero__title--solid,
+  .hero__title--red { font-size: 58px; }
+  .hero__title--sm  { font-size: 34px; }
+  .hero__sub        { max-width: 100%; font-size: 13.5px; }
+  .hero__watermark  { font-size: 180px; }
+
+  /* On mobile, the 3D goes below text.
+     Slideshow still goes full-width behind both. */
+  .hero--slideshow .hero__right {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero { padding-top: 71px; }
+  .hero__left  { padding: 48px 24px 36px; }
+  .hero__right { height: 340px; }
+
+  .hero__title--stroke,
+  .hero__title--solid,
+  .hero__title--red { font-size: 48px; }
+  .hero__title--sm  { font-size: 28px; }
+  .hero__sub        { font-size: 13px; }
+  .hero__watermark  { font-size: 140px; }
+  .hero__eyebrow-text { font-size: 9px; }
+
+  .hero__slide-controls { bottom: 24px; }
+}
+
+@media (max-width: 480px) {
+  .hero__title--stroke,
+  .hero__title--solid,
+  .hero__title--red { font-size: 40px; }
+  .hero__title--sm  { font-size: 24px; }
+  .hero__sub        { font-size: 12.5px; }
+  .hero__btn        { padding: 13px 22px; font-size: 10px; }
+  .hero__right      { height: 280px; }
+}

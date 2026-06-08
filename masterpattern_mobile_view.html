@@ -1,0 +1,498 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@400;500;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#F2EFE9;--bg2:#FAFAF7;--wh:#FFF;--nv:#0B1F3B;--rd:#C0272D;--or:#E8781A;--mt:#7A7872;--bd:rgba(11,31,59,0.1);--bds:rgba(11,31,59,0.06);--dk:#060D1A}
+.W{display:flex;justify-content:center;padding:20px 0 36px;background:var(--bg)}
+.phone{width:390px;border-radius:46px;border:1.5px solid rgba(11,31,59,0.13);overflow:hidden;box-shadow:0 0 0 7px rgba(11,31,59,0.045),0 24px 48px rgba(11,31,59,0.12)}
+.sb{height:52px;background:var(--bg2);display:flex;align-items:flex-end;justify-content:space-between;padding:0 28px 10px;position:relative}
+.di{width:128px;height:36px;background:#060D1A;border-radius:22px;position:absolute;top:9px;left:50%;transform:translateX(-50%)}
+.sb-t{font-size:12px;font-weight:700;color:var(--nv);font-family:'DM Sans',monospace;letter-spacing:-0.3px}
+.sb-ic{display:flex;align-items:center;gap:4px}
+.M{background:var(--bg2);font-family:'DM Sans',system-ui,sans-serif;color:var(--nv)}
+
+/* NAV */
+.mnav{height:56px;background:var(--wh);display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:0.5px solid var(--bd);position:relative}
+.mnav::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--rd)}
+.mnl1{color:var(--rd);font-size:12px;font-weight:700;letter-spacing:2.5px;line-height:1}
+.mnl2{color:rgba(11,31,59,0.2);font-size:5.5px;letter-spacing:4px;margin-top:3px}
+.mhb{display:flex;flex-direction:column;gap:4.5px}
+.mhbl{width:22px;height:1.5px;background:var(--nv)}
+
+/* HERO */
+.mhero{background:var(--bg2);padding:36px 20px 0;position:relative;overflow:hidden}
+.mhero-bg{position:absolute;top:30%;left:5px;font-family:'Playfair Display',serif;font-size:140px;font-weight:900;color:rgba(11,31,59,0.025);line-height:1;pointer-events:none;letter-spacing:-5px}
+.m-ey{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.m-eyl{width:18px;height:1.5px;background:var(--or);flex-shrink:0}
+.m-eyt{font-size:7px;letter-spacing:3px;color:var(--or);font-weight:700;font-family:monospace}
+.m-title{line-height:.88;margin-bottom:18px;letter-spacing:-1.5px}
+.mhs{font-family:'Playfair Display',serif;font-size:38px;font-weight:900;-webkit-text-stroke:1.2px rgba(11,31,59,0.38);color:transparent;display:block}
+.mhw{font-family:'Playfair Display',serif;font-size:38px;font-weight:900;color:var(--nv);display:block}
+.mhr{font-family:'Playfair Display',serif;font-size:38px;font-weight:900;color:var(--rd);display:block}
+.m-sub{font-size:11px;color:var(--mt);line-height:1.85;margin-bottom:22px}
+.m-btns{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.mbf{background:var(--rd);color:#fff;font-size:8.5px;font-weight:700;letter-spacing:1.5px;padding:11px 18px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
+.mbo{background:transparent;color:var(--nv);font-size:8.5px;font-weight:700;letter-spacing:1.5px;padding:11px 18px;border:0.5px solid var(--bd);cursor:pointer;font-family:'DM Sans',sans-serif}
+.m-badge{display:flex;align-items:center;gap:7px;padding-bottom:18px}
+.m-bdd{width:4.5px;height:4.5px;background:var(--or);border-radius:50%}
+.m-bdt{font-size:6.5px;letter-spacing:1.5px;color:rgba(11,31,59,0.3);font-family:monospace}
+
+/* 3D Canvas */
+.m-3dwrap{position:relative;width:100%;height:260px;background:var(--bg);overflow:hidden}
+.m-3dwrap::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 24px,rgba(11,31,59,0.04) 25px),repeating-linear-gradient(90deg,transparent,transparent 24px,rgba(11,31,59,0.04) 25px);pointer-events:none;z-index:0}
+.mc-tl,.mc-tr,.mc-bl,.mc-br{position:absolute;width:14px;height:14px;z-index:2;pointer-events:none}
+.mc-tl{top:10px;left:10px;border-left:1.5px solid var(--or);border-top:1.5px solid var(--or)}
+.mc-tr{top:10px;right:10px;border-right:1.5px solid var(--or);border-top:1.5px solid var(--or)}
+.mc-bl{bottom:10px;left:10px;border-left:1.5px solid var(--or);border-bottom:1.5px solid var(--or)}
+.mc-br{bottom:10px;right:10px;border-right:1.5px solid var(--or);border-bottom:1.5px solid var(--or)}
+.m-coord{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-size:6px;font-family:monospace;color:rgba(11,31,59,0.28);letter-spacing:1px;white-space:nowrap;z-index:2}
+#mc3d{width:100%;height:100%;display:block;position:relative;z-index:1}
+
+/* TICKER */
+.mtkr{background:var(--rd);height:36px;display:flex;align-items:center;overflow:hidden}
+.mtki{display:flex;white-space:nowrap;animation:sc 20s linear infinite}
+.mtkitem{font-size:7.5px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,0.9);padding:0 14px;display:flex;align-items:center;gap:6px;font-family:'DM Sans',sans-serif}
+.mtkd{width:2.5px;height:2.5px;background:rgba(255,255,255,0.35);border-radius:50%}
+@keyframes sc{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* STATS 2x2 */
+.mstats{background:var(--dk);display:grid;grid-template-columns:1fr 1fr}
+.mst{padding:28px 16px;text-align:center;border:0.5px solid rgba(255,255,255,0.06)}
+.mstn{font-family:'Playfair Display',serif;font-size:38px;font-weight:900;color:#fff;letter-spacing:-2px;line-height:1}
+.msts{font-size:16px;color:var(--or)}
+.mstl{font-size:6.5px;letter-spacing:3px;color:rgba(255,255,255,0.2);margin-top:7px;font-family:monospace;font-weight:600}
+
+/* TAG */
+.mtag{display:flex;align-items:center;gap:7px;margin-bottom:12px}
+.mtagl{width:16px;height:1.5px;background:var(--or);flex-shrink:0}
+.mtagtxt{font-size:7.5px;letter-spacing:3px;color:var(--or);font-weight:700;font-family:monospace}
+.mh{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;line-height:1.15;letter-spacing:-0.3px;margin-bottom:13px}
+.mp_{font-size:11px;color:var(--mt);line-height:1.85;margin-bottom:16px}
+
+/* ABOUT */
+.mabout-vis{background:var(--nv);height:190px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.mabout-grid{position:absolute;inset:0;opacity:0.11}
+.mabout-txt{background:var(--wh);padding:36px 20px}
+.mcl{display:flex;flex-direction:column;gap:9px;margin-bottom:22px}
+.mci{display:flex;align-items:center;gap:9px;font-size:10.5px;color:var(--nv);font-weight:600}
+.mcbox{width:17px;height:17px;background:var(--rd);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mcbox svg{width:8px;height:8px;stroke:#fff;stroke-width:2.5;fill:none}
+
+/* SERVICES */
+.msvcs{background:var(--bg);padding:44px 20px;position:relative;overflow:hidden}
+.msvcs-deco{position:absolute;font-family:'Playfair Display',serif;font-size:160px;font-weight:900;color:rgba(11,31,59,0.022);right:-5px;top:-10px;line-height:1;pointer-events:none;letter-spacing:-8px}
+.msg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.msc{background:var(--wh);padding:18px 14px;border:0.5px solid var(--bds);position:relative;overflow:hidden;cursor:pointer}
+.msc::after{content:'';position:absolute;top:0;left:0;width:0;height:2.5px;background:var(--rd);transition:width .25s}
+.msc:hover::after{width:100%}
+.msc:hover{background:var(--nv)}
+.msc:hover .mscn,.msc:hover .msct,.msc:hover .mscico svg{color:#fff;stroke:var(--or)}
+.msc:hover .mscd{color:rgba(255,255,255,0.5)}
+.mscn{font-size:7px;font-family:monospace;color:var(--or);letter-spacing:1.5px;margin-bottom:12px;font-weight:700;transition:color .2s}
+.mscico{margin-bottom:10px}
+.mscico svg{width:20px;height:20px;stroke:var(--nv);stroke-width:1.5;fill:none;transition:stroke .2s}
+.msct{font-size:11.5px;font-weight:700;color:var(--nv);margin-bottom:5px;line-height:1.3;transition:color .2s}
+.mscd{font-size:9px;color:var(--mt);line-height:1.65;transition:color .2s}
+.msca{font-size:7.5px;color:var(--or);letter-spacing:1px;font-weight:700;margin-top:10px;display:block}
+
+/* PROJECTS */
+.mprojs{background:var(--dk);padding:44px 20px;position:relative;overflow:hidden}
+.mprojs-deco{position:absolute;font-family:'Playfair Display',serif;font-size:160px;font-weight:900;color:rgba(255,255,255,0.014);right:-5px;top:-5px;line-height:1;pointer-events:none;letter-spacing:-8px}
+.mpstack{display:flex;flex-direction:column;gap:12px;margin-top:22px}
+.mpc{position:relative;overflow:hidden}
+.mpi{display:flex;align-items:flex-end;padding:18px;min-height:200px;position:relative}
+.mpov{position:absolute;inset:0;background:rgba(4,9,20,0.52)}
+.mpbd{position:relative;z-index:2;width:100%}
+.mpcat{font-size:7px;letter-spacing:2px;color:var(--or);font-weight:700;font-family:monospace;margin-bottom:6px}
+.mptit{font-family:'Playfair Display',serif;font-size:14px;font-weight:900;color:#fff;line-height:1.2}
+.mploc{font-size:8.5px;color:rgba(255,255,255,0.38);margin-top:3px;font-family:monospace}
+.mpdn{position:absolute;top:12px;right:12px;font-family:'Playfair Display',serif;font-size:38px;font-weight:900;color:rgba(255,255,255,0.06);letter-spacing:-2px;line-height:1}
+.mpln{position:absolute;bottom:0;left:0;width:0;height:2.5px;background:var(--or);transition:width .3s}
+.mpc:hover .mpln{width:100%}
+
+/* WHY */
+.mwhy-r{background:var(--rd);padding:44px 20px;position:relative;overflow:hidden}
+.mwhy-deco{position:absolute;font-family:'Playfair Display',serif;font-size:180px;font-weight:900;color:rgba(255,255,255,0.04);right:-10px;bottom:-40px;line-height:1;pointer-events:none}
+.mwnums{display:flex;margin-top:26px;padding-top:20px;border-top:0.5px solid rgba(255,255,255,0.14)}
+.mwn{flex:1;text-align:center;border-right:0.5px solid rgba(255,255,255,0.12)}
+.mwn:last-child{border-right:none}
+.mwnv{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:#fff;letter-spacing:-1px;line-height:1}
+.mwnl{font-size:6.5px;letter-spacing:2px;color:rgba(255,255,255,0.3);font-family:monospace;margin-top:4px}
+.mwhy-w{background:var(--wh);padding:40px 20px}
+.mpts{display:flex;flex-direction:column}
+.mpt{padding:15px 0;border-bottom:0.5px solid var(--bd);display:flex;gap:13px;align-items:flex-start}
+.mpt:last-child{border-bottom:none}
+.mptn{font-size:9px;font-family:monospace;color:var(--or);font-weight:700;width:20px;flex-shrink:0;padding-top:1px}
+.mptt{font-size:12px;font-weight:700;color:var(--nv);margin-bottom:4px}
+.mptd{font-size:10px;color:var(--mt);line-height:1.65}
+
+/* H&S */
+.mhs{background:var(--nv);padding:44px 20px}
+.mhs-items{display:flex;flex-direction:column;margin-top:18px}
+.mhsitem{display:flex;align-items:center;gap:9px;font-size:10.5px;color:rgba(255,255,255,0.58);padding:10px 0;border-bottom:0.5px solid rgba(255,255,255,0.07)}
+.mhsitem:last-child{border-bottom:none}
+.mhsdot{width:4.5px;height:4.5px;background:var(--or);flex-shrink:0}
+
+/* CONTACT */
+.mct{background:var(--bg);padding:44px 20px}
+.mctitems{display:flex;flex-direction:column;margin:18px 0 24px}
+.mctitem{display:flex;gap:12px;padding:14px 0;border-bottom:0.5px solid var(--bd)}
+.mctitem:first-child{border-top:0.5px solid var(--bd)}
+.mctiico{width:30px;height:30px;border:0.5px solid rgba(232,120,26,0.28);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mctiico svg{width:12px;height:12px;stroke:var(--or);stroke-width:1.8;fill:none}
+.mctil{font-size:6.5px;letter-spacing:2px;color:var(--or);font-family:monospace;font-weight:700;margin-bottom:3px}
+.mctiv{font-size:11px;color:var(--nv);line-height:1.4;font-weight:500}
+.mform{background:var(--wh);padding:22px 20px}
+.mfl{font-size:7px;letter-spacing:2px;color:rgba(11,31,59,0.35);font-family:monospace;font-weight:700;display:block;margin-bottom:5px}
+.mfi{width:100%;padding:9px 12px;background:var(--bg);border:0.5px solid var(--bd);color:var(--nv);font-size:11px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif}
+.mfi:focus{border-color:rgba(232,120,26,0.4)}
+.mta_{height:70px;resize:none}
+.mfsub{background:var(--nv);color:#fff;width:100%;padding:12px;font-size:9px;font-weight:700;letter-spacing:2.5px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
+
+/* FOOTER */
+.mfoot{background:#020810;padding:36px 20px 0}
+.mft{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding-bottom:28px;border-bottom:0.5px solid rgba(255,255,255,0.06)}
+.mftl1{color:var(--rd);font-size:12px;font-weight:700;letter-spacing:2.5px;line-height:1;font-family:'DM Sans',sans-serif}
+.mftl2{color:rgba(255,255,255,0.15);font-size:5.5px;letter-spacing:5px;margin-top:3px;margin-bottom:12px}
+.mftd{font-size:10px;color:rgba(255,255,255,0.22);line-height:1.75;grid-column:1/-1}
+.mftt{font-size:7px;letter-spacing:2.5px;color:rgba(255,255,255,0.26);font-family:monospace;font-weight:700;margin-bottom:12px}
+.mful{list-style:none;display:flex;flex-direction:column;gap:7px}
+.mful a{font-size:10px;color:rgba(255,255,255,0.22);text-decoration:none}
+.mfbt{padding:16px 0;display:flex;flex-direction:column;gap:8px}
+.mfcp{font-size:8px;color:rgba(255,255,255,0.18)}
+.mfpl{display:flex;gap:12px}
+.mfpl a{font-size:8px;color:rgba(255,255,255,0.18);text-decoration:none}
+.m-homeind{background:var(--bg2);height:34px;display:flex;align-items:center;justify-content:center}
+.m-homebar{width:130px;height:5px;background:rgba(11,31,59,0.18);border-radius:3px}
+
+@keyframes fu{0%{opacity:0;transform:translateY(12px)}100%{opacity:1;transform:translateY(0)}}
+.mhero>*{animation:fu .6s ease both}
+.mhero .m-ey{animation-delay:.06s}
+.mhero .m-title{animation-delay:.16s}
+.mhero .m-sub{animation-delay:.26s}
+.mhero .m-btns{animation-delay:.36s}
+.mhero .m-badge{animation-delay:.46s}
+</style>
+
+<div class="W">
+<div class="phone">
+
+<!-- Status Bar -->
+<div class="sb">
+  <div class="di"></div>
+  <span class="sb-t">9:41</span>
+  <div class="sb-ic">
+    <svg width="14" height="10" viewBox="0 0 14 10"><rect x="0" y="6" width="2.5" height="4" rx="0.5" fill="#0B1F3B" opacity="0.5"/><rect x="3.5" y="4" width="2.5" height="6" rx="0.5" fill="#0B1F3B" opacity="0.65"/><rect x="7" y="2" width="2.5" height="8" rx="0.5" fill="#0B1F3B" opacity="0.8"/><rect x="10.5" y="0" width="2.5" height="10" rx="0.5" fill="#0B1F3B"/></svg>
+    <svg width="16" height="12" viewBox="0 0 16 12"><path d="M1 4a9.5 9.5 0 0 1 14 0" fill="none" stroke="#0B1F3B" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/><path d="M3.5 6.5a6 6 0 0 1 9 0" fill="none" stroke="#0B1F3B" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/><path d="M6 9a2.5 2.5 0 0 1 4 0" fill="none" stroke="#0B1F3B" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11" r="1" fill="#0B1F3B"/></svg>
+    <svg width="22" height="11" viewBox="0 0 22 11"><rect x="0" y="1" width="18" height="9" rx="2" fill="none" stroke="#0B1F3B" stroke-width="1.2"/><rect x="1.5" y="2.5" width="14" height="6" rx="1" fill="#0B1F3B"/><rect x="19" y="3.5" width="2.5" height="4" rx="1" fill="#0B1F3B" opacity="0.5"/></svg>
+  </div>
+</div>
+
+<div class="M">
+
+<!-- NAV -->
+<nav class="mnav">
+  <div>
+    <div class="mnl1">MASTERPARTTERN</div>
+    <div class="mnl2">NIG. LTD.</div>
+  </div>
+  <div class="mhb"><div class="mhbl"></div><div class="mhbl" style="width:16px"></div><div class="mhbl"></div></div>
+</nav>
+
+<!-- HERO TEXT -->
+<div class="mhero">
+  <div class="mhero-bg">MP</div>
+  <div class="m-ey"><div class="m-eyl"></div><span class="m-eyt">TRUSTED CONSTRUCTION · LAGOS</span></div>
+  <div class="m-title">
+    <span class="mhs">BUILDING</span>
+    <span class="mhw">EXCELLENCE</span>
+    <span class="mhr">WITH</span>
+    <span class="mhr">QUALITY</span>
+    <span class="mhs" style="font-size:24px;letter-spacing:0;margin-top:5px">&amp; INTEGRITY</span>
+  </div>
+  <p class="m-sub">High-quality construction, civil engineering, renovation, electrical, plumbing, and project management delivered with precision across Nigeria.</p>
+  <div class="m-btns">
+    <button class="mbf">CALL US TODAY</button>
+    <button class="mbo">VIEW PROJECTS</button>
+  </div>
+  <div class="m-badge"><div class="m-bdd"></div><span class="m-bdt">9, AGADE STREET, SABO YABA · LAGOS</span></div>
+</div>
+
+<!-- 3D CANVAS -->
+<div class="m-3dwrap">
+  <div class="mc-tl"></div><div class="mc-tr"></div>
+  <div class="mc-bl"></div><div class="mc-br"></div>
+  <div class="m-coord">LAT 6°31'N · LONG 3°22'E · LAGOS, NIGERIA</div>
+  <canvas id="mc3d"></canvas>
+</div>
+
+<!-- TICKER -->
+<div class="mtkr">
+  <div class="mtki">
+    <div class="mtkitem"><div class="mtkd"></div>CONSTRUCTION</div>
+    <div class="mtkitem"><div class="mtkd"></div>CIVIL ENGINEERING</div>
+    <div class="mtkitem"><div class="mtkd"></div>RENOVATION</div>
+    <div class="mtkitem"><div class="mtkd"></div>ELECTRICAL</div>
+    <div class="mtkitem"><div class="mtkd"></div>PLUMBING</div>
+    <div class="mtkitem"><div class="mtkd"></div>PROJECT MANAGEMENT</div>
+    <div class="mtkitem"><div class="mtkd"></div>HSE COMPLIANT</div>
+    <div class="mtkitem"><div class="mtkd"></div>CONSTRUCTION</div>
+    <div class="mtkitem"><div class="mtkd"></div>CIVIL ENGINEERING</div>
+    <div class="mtkitem"><div class="mtkd"></div>RENOVATION</div>
+    <div class="mtkitem"><div class="mtkd"></div>ELECTRICAL</div>
+    <div class="mtkitem"><div class="mtkd"></div>PLUMBING</div>
+    <div class="mtkitem"><div class="mtkd"></div>PROJECT MANAGEMENT</div>
+    <div class="mtkitem"><div class="mtkd"></div>HSE COMPLIANT</div>
+  </div>
+</div>
+
+<!-- STATS 2×2 -->
+<div class="mstats">
+  <div class="mst"><div class="mstn"><span data-count="10">0</span><span class="msts">+</span></div><div class="mstl">YEARS EXPERIENCE</div></div>
+  <div class="mst"><div class="mstn"><span data-count="200">0</span><span class="msts">+</span></div><div class="mstl">PROJECTS DONE</div></div>
+  <div class="mst"><div class="mstn"><span data-count="50">0</span><span class="msts">+</span></div><div class="mstl">PROFESSIONALS</div></div>
+  <div class="mst"><div class="mstn"><span data-count="100">0</span><span class="msts">%</span></div><div class="mstl">CLIENT SATISFACTION</div></div>
+</div>
+
+<!-- ABOUT -->
+<div class="mabout-vis">
+  <svg class="mabout-grid" width="100%" height="100%" viewBox="0 0 390 190" preserveAspectRatio="xMidYMid slice">
+    <g stroke="#E8781A" stroke-width="0.4"><line x1="0" y1="30" x2="390" y2="30"/><line x1="0" y1="60" x2="390" y2="60"/><line x1="0" y1="90" x2="390" y2="90"/><line x1="0" y1="120" x2="390" y2="120"/><line x1="0" y1="150" x2="390" y2="150"/><line x1="0" y1="180" x2="390" y2="180"/><line x1="30" y1="0" x2="30" y2="190"/><line x1="60" y1="0" x2="60" y2="190"/><line x1="90" y1="0" x2="90" y2="190"/><line x1="120" y1="0" x2="120" y2="190"/><line x1="150" y1="0" x2="150" y2="190"/><line x1="180" y1="0" x2="180" y2="190"/><line x1="210" y1="0" x2="210" y2="190"/><line x1="240" y1="0" x2="240" y2="190"/><line x1="270" y1="0" x2="270" y2="190"/><line x1="300" y1="0" x2="300" y2="190"/><line x1="330" y1="0" x2="330" y2="190"/><line x1="360" y1="0" x2="360" y2="190"/></g>
+  </svg>
+  <svg width="320" height="160" viewBox="0 0 320 160" style="position:relative;z-index:1">
+    <rect x="20" y="30" width="55" height="130" fill="#0D2545" stroke="rgba(232,120,26,0.5)" stroke-width="1"/>
+    <rect x="20" y="30" width="55" height="3" fill="#C0272D" opacity="0.9"/>
+    <rect x="27" y="40" width="8" height="12" rx="1" fill="rgba(232,120,26,0.5)"/><rect x="40" y="40" width="8" height="12" rx="1" fill="rgba(232,120,26,0.25)"/><rect x="53" y="40" width="8" height="12" rx="1" fill="rgba(232,120,26,0.6)"/>
+    <rect x="27" y="60" width="8" height="12" rx="1" fill="rgba(232,120,26,0.3)"/><rect x="40" y="60" width="8" height="12" rx="1" fill="rgba(232,120,26,0.6)"/><rect x="53" y="60" width="8" height="12" rx="1" fill="rgba(232,120,26,0.2)"/>
+    <rect x="27" y="80" width="8" height="12" rx="1" fill="rgba(232,120,26,0.55)"/><rect x="40" y="80" width="8" height="12" rx="1" fill="rgba(232,120,26,0.35)"/><rect x="53" y="80" width="8" height="12" rx="1" fill="rgba(232,120,26,0.6)"/>
+    <rect x="30" y="120" width="30" height="40" rx="1" fill="rgba(232,120,26,0.35)"/>
+    <rect x="90" y="10" width="80" height="150" fill="#0B1F3B" stroke="rgba(192,39,45,0.4)" stroke-width="1"/>
+    <rect x="90" y="10" width="80" height="3" fill="rgba(232,120,26,0.7)"/>
+    <line x1="88" y1="12" x2="88" y2="160" stroke="rgba(255,255,255,0.12)" stroke-width="3"/><line x1="172" y1="12" x2="172" y2="160" stroke="rgba(255,255,255,0.12)" stroke-width="3"/>
+    <line x1="86" y1="60" x2="174" y2="60" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/><line x1="86" y1="110" x2="174" y2="110" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+    <rect x="98" y="22" width="9" height="12" rx="1" fill="rgba(232,120,26,0.55)"/><rect x="112" y="22" width="9" height="12" rx="1" fill="rgba(232,120,26,0.25)"/><rect x="126" y="22" width="9" height="12" rx="1" fill="rgba(232,120,26,0.6)"/><rect x="140" y="22" width="9" height="12" rx="1" fill="rgba(232,120,26,0.3)"/><rect x="154" y="22" width="9" height="12" rx="1" fill="rgba(232,120,26,0.5)"/>
+    <rect x="98" y="44" width="9" height="12" rx="1" fill="rgba(232,120,26,0.3)"/><rect x="112" y="44" width="9" height="12" rx="1" fill="rgba(232,120,26,0.6)"/><rect x="140" y="44" width="9" height="12" rx="1" fill="rgba(232,120,26,0.55)"/><rect x="154" y="44" width="9" height="12" rx="1" fill="rgba(232,120,26,0.2)"/>
+    <rect x="98" y="74" width="9" height="12" rx="1" fill="rgba(232,120,26,0.6)"/><rect x="126" y="74" width="9" height="12" rx="1" fill="rgba(232,120,26,0.35)"/><rect x="154" y="74" width="9" height="12" rx="1" fill="rgba(232,120,26,0.55)"/>
+    <rect x="104" y="120" width="30" height="40" rx="1" fill="rgba(192,39,45,0.45)"/>
+    <rect x="190" y="60" width="60" height="100" fill="#071425" stroke="rgba(232,120,26,0.3)" stroke-width="0.8"/>
+    <rect x="196" y="70" width="7" height="10" rx="1" fill="rgba(232,120,26,0.4)"/><rect x="208" y="70" width="7" height="10" rx="1" fill="rgba(232,120,26,0.6)"/><rect x="220" y="70" width="7" height="10" rx="1" fill="rgba(232,120,26,0.3)"/><rect x="232" y="70" width="7" height="10" rx="1" fill="rgba(232,120,26,0.5)"/>
+    <rect x="196" y="88" width="7" height="10" rx="1" fill="rgba(232,120,26,0.6)"/><rect x="208" y="88" width="7" height="10" rx="1" fill="rgba(232,120,26,0.25)"/><rect x="220" y="88" width="7" height="10" rx="1" fill="rgba(232,120,26,0.5)"/>
+    <rect x="196" y="106" width="7" height="10" rx="1" fill="rgba(232,120,26,0.3)"/><rect x="232" y="106" width="7" height="10" rx="1" fill="rgba(232,120,26,0.55)"/>
+    <rect x="260" y="80" width="50" height="80" fill="#060E1C" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+    <rect x="266" y="88" width="7" height="10" rx="1" fill="rgba(232,120,26,0.4)"/><rect x="278" y="88" width="7" height="10" rx="1" fill="rgba(232,120,26,0.6)"/><rect x="290" y="88" width="7" height="10" rx="1" fill="rgba(232,120,26,0.25)"/>
+    <rect x="266" y="106" width="7" height="10" rx="1" fill="rgba(232,120,26,0.55)"/><rect x="290" y="106" width="7" height="10" rx="1" fill="rgba(232,120,26,0.4)"/>
+    <rect x="20" y="157" width="290" height="3" rx="1" fill="var(--or)" opacity="0.45"/>
+  </svg>
+</div>
+<div class="mabout-txt">
+  <div class="mtag"><div class="mtagl"></div><span class="mtagtxt">WHO WE ARE</span></div>
+  <h2 class="mh" style="color:var(--nv)">Nigeria's Premier <em style="color:var(--rd);font-style:italic">Engineering</em> &amp; Construction Company</h2>
+  <p class="mp_">Masterpattern Nig. Ltd is a full-service construction and engineering company headquartered in Lagos, delivering quality, safety, and professionalism across all projects.</p>
+  <div class="mcl">
+    <div class="mci"><div class="mcbox"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1"/></svg></div>Licensed, Certified &amp; Insured</div>
+    <div class="mci"><div class="mcbox"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1"/></svg></div>On-Time, On-Budget Delivery</div>
+    <div class="mci"><div class="mcbox"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1"/></svg></div>Safety-First on Every Site</div>
+    <div class="mci"><div class="mcbox"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1"/></svg></div>Premium Materials &amp; Expert Execution</div>
+  </div>
+  <button class="mbf" style="font-size:8px">LEARN MORE →</button>
+</div>
+
+<!-- SERVICES -->
+<div class="msvcs">
+  <div class="msvcs-deco">02</div>
+  <div class="mtag"><div class="mtagl"></div><span class="mtagtxt">WHAT WE DO</span></div>
+  <h2 class="mh">Our Core <span style="color:var(--rd)">Services</span></h2>
+  <div class="msg">
+    <div class="msc"><div class="mscn">01</div><div class="mscico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></div><div class="msct">Construction Services</div><div class="mscd">Residential, commercial &amp; industrial buildings.</div><span class="msca">LEARN MORE →</span></div>
+    <div class="msc"><div class="mscn">02</div><div class="mscico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 20V10l8-6 8 6v10M10 20v-6h4v6"/></svg></div><div class="msct">Civil Engineering</div><div class="mscd">Roads, drainage &amp; civil infrastructure.</div><span class="msca">LEARN MORE →</span></div>
+    <div class="msc"><div class="mscn">03</div><div class="mscico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div class="msct">Renovation</div><div class="mscd">Remodeling, finishing &amp; upgrades.</div><span class="msca">LEARN MORE →</span></div>
+    <div class="msc"><div class="mscn">04</div><div class="mscico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="msct">Electrical</div><div class="mscd">Full wiring &amp; power systems.</div><span class="msca">LEARN MORE →</span></div>
+    <div class="msc"><div class="mscn">05</div><div class="mscico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7H6l-2 6h16l-2-6h-3V5a3 3 0 0 0-3-3z"/></svg></div><div class="msct">Plumbing</div><div class="mscd">Water systems &amp; drainage.</div><span class="msca">LEARN MORE →</span></div>
+    <div class="msc"><div class="mscn">06</div><div class="mscico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div class="msct">Project Management</div><div class="mscd">Planning, cost control &amp; QA.</div><span class="msca">LEARN MORE →</span></div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="mprojs">
+  <div class="mprojs-deco">03</div>
+  <div class="mtag"><div class="mtagl"></div><span class="mtagtxt" style="color:rgba(255,255,255,0.35)">OUR PORTFOLIO</span></div>
+  <h2 class="mh" style="color:#fff;margin-bottom:0">Featured <span style="color:var(--rd)">Projects</span></h2>
+  <div class="mpstack">
+    <div class="mpc">
+      <div class="mpi" style="background:#071428;min-height:210px">
+        <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 390 210" preserveAspectRatio="xMidYMid slice"><rect width="390" height="210" fill="#071428"/><g opacity="0.08" stroke="#E8781A" stroke-width="0.5"><line x1="30" y1="0" x2="30" y2="210"/><line x1="65" y1="0" x2="65" y2="210"/><line x1="100" y1="0" x2="100" y2="210"/><line x1="135" y1="0" x2="135" y2="210"/><line x1="170" y1="0" x2="170" y2="210"/><line x1="205" y1="0" x2="205" y2="210"/><line x1="240" y1="0" x2="240" y2="210"/><line x1="275" y1="0" x2="275" y2="210"/><line x1="310" y1="0" x2="310" y2="210"/><line x1="345" y1="0" x2="345" y2="210"/><line x1="380" y1="0" x2="380" y2="210"/></g>
+        <rect x="60" y="20" width="270" height="150" fill="#0B1F3B" stroke="rgba(232,120,26,0.4)" stroke-width="1"/><rect x="60" y="20" width="270" height="3" fill="#C0272D" opacity="0.9"/><line x1="58" y1="22" x2="58" y2="170" stroke="rgba(255,255,255,0.1)" stroke-width="4"/><line x1="332" y1="22" x2="332" y2="170" stroke="rgba(255,255,255,0.1)" stroke-width="4"/><line x1="55" y1="70" x2="335" y2="70" stroke="rgba(255,255,255,0.07)" stroke-width="2"/><line x1="55" y1="120" x2="335" y2="120" stroke="rgba(255,255,255,0.07)" stroke-width="2"/>
+        <rect x="76" y="32" width="12" height="18" rx="1" fill="rgba(232,120,26,0.55)"/><rect x="96" y="32" width="12" height="18" rx="1" fill="rgba(232,120,26,0.25)"/><rect x="116" y="32" width="12" height="18" rx="1" fill="rgba(232,120,26,0.6)"/><rect x="136" y="32" width="12" height="18" rx="1" fill="rgba(232,120,26,0.3)"/><rect x="156" y="32" width="12" height="18" rx="1" fill="rgba(232,120,26,0.55)"/><rect x="176" y="32" width="12" height="18" rx="1" fill="rgba(232,120,26,0.2)"/><rect x="196" y="32" width="12" height="18" rx="1" fill="rgba(232,120,26,0.6)"/><rect x="216" y="32" width="12" height="18" rx="1" fill="rgba(232,120,26,0.35)"/><rect x="236" y="32" width="12" height="18" rx="1" fill="rgba(232,120,26,0.5)"/><rect x="256" y="32" width="12" height="18" rx="1" fill="rgba(232,120,26,0.25)"/><rect x="276" y="32" width="12" height="18" rx="1" fill="rgba(232,120,26,0.6)"/><rect x="296" y="32" width="12" height="18" rx="1" fill="rgba(232,120,26,0.4)"/>
+        <rect x="76" y="58" width="12" height="18" rx="1" fill="rgba(232,120,26,0.3)"/><rect x="116" y="58" width="12" height="18" rx="1" fill="rgba(232,120,26,0.6)"/><rect x="156" y="58" width="12" height="18" rx="1" fill="rgba(232,120,26,0.4)"/><rect x="196" y="58" width="12" height="18" rx="1" fill="rgba(232,120,26,0.55)"/><rect x="236" y="58" width="12" height="18" rx="1" fill="rgba(232,120,26,0.2)"/><rect x="276" y="58" width="12" height="18" rx="1" fill="rgba(232,120,26,0.5)"/>
+        <rect x="96" y="86" width="12" height="18" rx="1" fill="rgba(232,120,26,0.6)"/><rect x="136" y="86" width="12" height="18" rx="1" fill="rgba(232,120,26,0.3)"/><rect x="176" y="86" width="12" height="18" rx="1" fill="rgba(232,120,26,0.55)"/><rect x="216" y="86" width="12" height="18" rx="1" fill="rgba(232,120,26,0.25)"/><rect x="256" y="86" width="12" height="18" rx="1" fill="rgba(232,120,26,0.6)"/>
+        <rect x="60" y="155" width="270" height="55" fill="rgba(4,9,20,0.72)"/>
+        </svg>
+        <div class="mpov"></div><div class="mpdn">01</div>
+        <div class="mpbd"><div class="mpcat">RESIDENTIAL · LAGOS</div><div class="mptit">Residential Building Construction</div><div class="mploc">VICTORIA ISLAND, LAGOS</div></div>
+        <div class="mpln"></div>
+      </div>
+    </div>
+    <div class="mpc">
+      <div class="mpi" style="background:#0f1a0c;min-height:180px">
+        <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 390 180" preserveAspectRatio="xMidYMid slice"><rect width="390" height="180" fill="#0a1509"/><rect x="10" y="30" width="370" height="130" fill="#142010" stroke="rgba(232,120,26,0.3)" stroke-width="1"/><rect x="10" y="30" width="370" height="3" fill="#C0272D" opacity="0.7"/><rect x="20" y="45" width="80" height="60" rx="1" fill="rgba(232,120,26,0.18)" stroke="rgba(232,120,26,0.35)" stroke-width="0.5"/><rect x="110" y="45" width="80" height="60" rx="1" fill="rgba(232,120,26,0.14)" stroke="rgba(232,120,26,0.35)" stroke-width="0.5"/><rect x="200" y="45" width="80" height="60" rx="1" fill="rgba(232,120,26,0.22)" stroke="rgba(232,120,26,0.35)" stroke-width="0.5"/><rect x="290" y="45" width="90" height="60" rx="1" fill="rgba(232,120,26,0.16)" stroke="rgba(232,120,26,0.35)" stroke-width="0.5"/><rect x="10" y="145" width="370" height="35" fill="rgba(0,0,0,0.65)"/></svg>
+        <div class="mpov"></div><div class="mpdn">02</div>
+        <div class="mpbd"><div class="mpcat">EDUCATION · LAGOS STATE</div><div class="mptit">School Renovation Projects</div><div class="mploc">LAGOS STATE, NIGERIA</div></div>
+        <div class="mpln"></div>
+      </div>
+    </div>
+    <div class="mpc">
+      <div class="mpi" style="background:#0c0c1e;min-height:180px">
+        <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 390 180" preserveAspectRatio="xMidYMid slice"><rect width="390" height="180" fill="#080820"/><rect x="20" y="15" width="350" height="155" fill="#0e0e28" stroke="rgba(192,39,45,0.35)" stroke-width="1"/><rect x="20" y="15" width="350" height="3" fill="#E8781A" opacity="0.7"/><rect x="32" y="28" width="36" height="48" rx="1" fill="rgba(232,120,26,0.4)"/><rect x="76" y="28" width="36" height="48" rx="1" fill="rgba(232,120,26,0.2)"/><rect x="120" y="28" width="36" height="48" rx="1" fill="rgba(232,120,26,0.5)"/><rect x="164" y="28" width="36" height="48" rx="1" fill="rgba(232,120,26,0.25)"/><rect x="208" y="28" width="36" height="48" rx="1" fill="rgba(232,120,26,0.45)"/><rect x="252" y="28" width="36" height="48" rx="1" fill="rgba(232,120,26,0.55)"/><rect x="296" y="28" width="36" height="48" rx="1" fill="rgba(232,120,26,0.3)"/><rect x="340" y="28" width="22" height="48" rx="1" fill="rgba(232,120,26,0.4)"/><rect x="140" y="100" width="110" height="55" rx="1" fill="rgba(192,39,45,0.4)"/><rect x="20" y="147" width="350" height="23" fill="rgba(0,0,0,0.65)"/></svg>
+        <div class="mpov"></div><div class="mpdn">03</div>
+        <div class="mpbd"><div class="mpcat">COMMERCIAL · V.I.</div><div class="mptit">Office Complex Finishing</div><div class="mploc">VICTORIA ISLAND, LAGOS</div></div>
+        <div class="mpln"></div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:20px"><button class="mbf">VIEW ALL PROJECTS</button></div>
+</div>
+
+<!-- WHY US -->
+<div class="mwhy-r">
+  <div class="mwhy-deco">W</div>
+  <div class="mtag"><div class="mtagl" style="background:rgba(255,255,255,0.4)"></div><span class="mtagtxt" style="color:rgba(255,255,255,0.5)">WHY MASTERPATTERN</span></div>
+  <h2 class="mh" style="color:#fff">We Build With Purpose, Precision &amp; Pride.</h2>
+  <p style="font-size:11px;color:rgba(255,255,255,0.62);line-height:1.85;margin-bottom:0">With experienced professionals and modern techniques, every project is completed efficiently, safely, and within budget.</p>
+  <div class="mwnums">
+    <div class="mwn"><div class="mwnv">10+</div><div class="mwnl">YEARS</div></div>
+    <div class="mwn"><div class="mwnv">200+</div><div class="mwnl">PROJECTS</div></div>
+    <div class="mwn"><div class="mwnv">50+</div><div class="mwnl">EXPERTS</div></div>
+  </div>
+</div>
+<div class="mwhy-w">
+  <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--nv);margin-bottom:22px;font-style:italic">Four reasons to choose <span style="color:var(--or);font-style:normal">Masterpattern</span></div>
+  <div class="mpts">
+    <div class="mpt"><div class="mptn">01</div><div><div class="mptt">Safety First, Always</div><div class="mptd">Strict HSE compliance enforced on every project site.</div></div></div>
+    <div class="mpt"><div class="mptn">02</div><div><div class="mptt">Proven Track Record</div><div class="mptd">A decade of successful delivery across Nigeria.</div></div></div>
+    <div class="mpt"><div class="mptn">03</div><div><div class="mptt">On-Time, On-Budget</div><div class="mptd">Transparent pricing, zero hidden costs, strict timelines.</div></div></div>
+    <div class="mpt"><div class="mptn">04</div><div><div class="mptt">Quality Guaranteed</div><div class="mptd">Premium materials and rigorous quality control always.</div></div></div>
+  </div>
+</div>
+
+<!-- H&S -->
+<div class="mhs">
+  <div class="mtag"><div class="mtagl"></div><span class="mtagtxt">HEALTH &amp; SAFETY</span></div>
+  <h2 class="mh" style="color:#fff">Zero Compromise.<br>Zero Incidents.</h2>
+  <p style="font-size:11px;color:rgba(255,255,255,0.42);line-height:1.8;margin-bottom:16px">Every site operates under a strict HSE framework protecting workers, clients, and communities.</p>
+  <div class="mhs-items">
+    <div class="mhsitem"><div class="mhsdot"></div>Full HSE compliance on all active sites</div>
+    <div class="mhsitem"><div class="mhsdot"></div>Mandatory safety training for all personnel</div>
+    <div class="mhsitem"><div class="mhsdot"></div>Regular inspections and risk assessments</div>
+    <div class="mhsitem"><div class="mhsdot"></div>PPE enforced for all staff at all times</div>
+    <div class="mhsitem"><div class="mhsdot"></div>Emergency response protocols on every site</div>
+  </div>
+  <button class="mbf" style="margin-top:20px;font-size:8px">READ SAFETY POLICY</button>
+</div>
+
+<!-- CONTACT -->
+<div class="mct">
+  <div class="mtag"><div class="mtagl"></div><span class="mtagtxt">GET IN TOUCH</span></div>
+  <h2 class="mh">Let's Build <em style="color:var(--rd)">Something</em><br>Great Together.</h2>
+  <p class="mp_">Reach out today for a free consultation and quote.</p>
+  <div class="mctitems">
+    <div class="mctitem"><div class="mctiico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="mctil">ADDRESS</div><div class="mctiv">9, Agade Street, Sabo, Yaba, Lagos</div></div></div>
+    <div class="mctitem"><div class="mctiico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4A2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.81A16 16 0 0 0 16 16.9l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div><div class="mctil">PHONE</div><div class="mctiv">08038159214</div></div></div>
+    <div class="mctitem"><div class="mctiico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="mctil">EMAIL</div><div class="mctiv">masterpatternltd@gmail.com</div></div></div>
+    <div class="mctitem"><div class="mctiico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="mctil">HOURS</div><div class="mctiv">Mon–Fri: 8AM–5PM · Sat: 9AM–2PM</div></div></div>
+  </div>
+  <div class="mform">
+    <div style="font-size:14px;font-weight:700;color:var(--nv);margin-bottom:18px;font-family:'Playfair Display',serif">Request a Free Quote</div>
+    <label class="mfl">FULL NAME</label><input class="mfi" type="text" placeholder="Your full name"/>
+    <label class="mfl">PHONE NUMBER</label><input class="mfi" type="text" placeholder="08XXXXXXXXX"/>
+    <label class="mfl">EMAIL ADDRESS</label><input class="mfi" type="email" placeholder="your@email.com"/>
+    <label class="mfl">SERVICE REQUIRED</label>
+    <select class="mfi" style="cursor:pointer"><option>Select a service...</option><option>Construction</option><option>Civil Engineering</option><option>Renovation</option><option>Electrical</option><option>Plumbing</option><option>Project Management</option></select>
+    <label class="mfl">PROJECT DETAILS</label>
+    <textarea class="mfi mta_" placeholder="Describe your project..."></textarea>
+    <button class="mfsub">SEND MESSAGE →</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="mfoot">
+  <div class="mft">
+    <div>
+      <div class="mftl1">MASTERPARTTERN</div>
+      <div class="mftl2">NIG. LTD.</div>
+    </div>
+    <div style="grid-column:1/-1"><p class="mftd">Building excellence with quality and integrity across Nigeria. Your trusted construction partner.</p></div>
+    <div><div class="mftt">QUICK LINKS</div><ul class="mful"><li><a href="#">Home</a></li><li><a href="#">About Us</a></li><li><a href="#">Services</a></li><li><a href="#">Projects</a></li><li><a href="#">Contact</a></li></ul></div>
+    <div><div class="mftt">SERVICES</div><ul class="mful"><li><a href="#">Construction</a></li><li><a href="#">Civil Eng.</a></li><li><a href="#">Renovation</a></li><li><a href="#">Electrical</a></li><li><a href="#">Plumbing</a></li></ul></div>
+  </div>
+  <div class="mfbt">
+    <div class="mfcp">© 2026 Masterpattern Nig. Ltd. All Rights Reserved.</div>
+    <div class="mfpl"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">HSE</a></div>
+  </div>
+</div>
+
+<!-- Home Indicator -->
+<div class="m-homeind"><div class="m-homebar"></div></div>
+
+</div><!-- .M -->
+</div><!-- .phone -->
+</div><!-- .W -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  var canvas=document.getElementById('mc3d');
+  if(!canvas||typeof THREE==='undefined')return;
+  var W=canvas.offsetWidth||390,H=canvas.offsetHeight||260;
+  var scene=new THREE.Scene();
+  var camera=new THREE.PerspectiveCamera(55,W/H,0.1,100);
+  var renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});
+  renderer.setSize(W,H);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.setClearColor(0x000000,0);
+  var sM=new THREE.MeshLambertMaterial({color:0x0B1F3B,transparent:true,opacity:0.88});
+  var wM=new THREE.LineBasicMaterial({color:0xE8781A});
+  var rM=new THREE.MeshLambertMaterial({color:0xC0272D,transparent:true,opacity:0.92});
+  var cM=new THREE.MeshLambertMaterial({color:0x607080});
+  function bld(x,z,bw,bh,bd,isMain){
+    var g=new THREE.BoxGeometry(bw,bh,bd);
+    var m=new THREE.Mesh(g,sM.clone());
+    m.position.set(x,bh/2,z);scene.add(m);
+    var e=new THREE.EdgesGeometry(g);
+    var w=new THREE.LineSegments(e,wM);
+    w.position.set(x,bh/2,z);scene.add(w);
+    if(isMain){var cg=new THREE.BoxGeometry(bw+0.05,0.1,bd+0.05);var cm=new THREE.Mesh(cg,rM);cm.position.set(x,bh+0.05,z);scene.add(cm);}
+  }
+  bld(0,0,2.0,8.0,2.0,true);
+  bld(-3.0,0.3,1.7,5.5,1.7,false);
+  bld(2.7,-0.7,1.5,6.8,1.5,false);
+  bld(-1.5,2.4,1.6,3.5,1.6,false);
+  var cv=new THREE.Mesh(new THREE.BoxGeometry(0.1,4.5,0.1),cM);cv.position.set(1.0,10.5,1.0);scene.add(cv);
+  var ch=new THREE.Mesh(new THREE.BoxGeometry(4.0,0.1,0.1),cM);ch.position.set(-1.0,12.8,1.0);scene.add(ch);
+  var cc=new THREE.Mesh(new THREE.BoxGeometry(0.8,0.1,0.1),cM);cc.position.set(1.8,12.8,1.0);scene.add(cc);
+  var cw=new THREE.Mesh(new THREE.BoxGeometry(0.25,0.25,0.25),new THREE.MeshLambertMaterial({color:0xC0272D,transparent:true,opacity:0.9}));cw.position.set(2.3,12.65,1.0);scene.add(cw);
+  var grid=new THREE.GridHelper(20,20,0xE8781A,0xD4D0C6);grid.material.transparent=true;grid.material.opacity=0.3;scene.add(grid);
+  var pg=new THREE.BufferGeometry();var pp=new Float32Array(72*3);
+  for(var i=0;i<72;i++){pp[i*3]=(Math.random()-0.5)*18;pp[i*3+1]=Math.random()*13;pp[i*3+2]=(Math.random()-0.5)*18;}
+  pg.setAttribute('position',new THREE.BufferAttribute(pp,3));
+  var pts=new THREE.Points(pg,new THREE.PointsMaterial({color:0xE8781A,size:0.065}));scene.add(pts);
+  scene.add(new THREE.AmbientLight(0xA0B0C0,1.3));
+  var dl=new THREE.DirectionalLight(0xffffff,0.9);dl.position.set(6,10,6);scene.add(dl);
+  var pl=new THREE.PointLight(0xE8781A,1.4,26);pl.position.set(4,8,3);scene.add(pl);
+  var angle=Math.PI*0.55;
+  function animate(){
+    requestAnimationFrame(animate);
+    angle+=0.004;
+    camera.position.x=Math.sin(angle)*12;
+    camera.position.z=Math.cos(angle)*12;
+    camera.position.y=5+Math.sin(angle*0.35)*1.4;
+    camera.lookAt(0,3,0);
+    pts.rotation.y+=0.001;
+    renderer.render(scene,camera);
+  }
+  animate();
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    var t=parseInt(el.getAttribute('data-count')),c=0,s=t/70;
+    var timer=setInterval(function(){c=Math.min(c+s,t);el.textContent=Math.floor(c);if(c>=t)clearInterval(timer);},20);
+  });
+})();
+</script>

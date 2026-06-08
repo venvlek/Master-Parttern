@@ -1,0 +1,185 @@
+.services {
+  background: var(--bg);
+  padding: 88px 52px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative large number */
+.services::before {
+  content: '02';
+  position: absolute;
+  right: -10px;
+  top: -20px;
+  font-family: var(--font-display);
+  font-size: 220px;
+  font-weight: 900;
+  color: rgba(11, 31, 59, 0.022);
+  line-height: 1;
+  pointer-events: none;
+  letter-spacing: -12px;
+}
+
+/* ── Header ── */
+.services__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 44px;
+  padding-bottom: 22px;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.services__tag {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.services__tag-line {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--orange);
+}
+
+.services__tag-text {
+  font-size: 8px;
+  letter-spacing: 3.5px;
+  color: var(--orange);
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.services__heading {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--navy);
+  letter-spacing: -0.5px;
+  margin-top: 8px;
+}
+
+.services__heading span { color: var(--red); }
+
+.services__cta-link {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--navy);
+  border: 0.5px solid var(--border);
+  padding: 11px 22px;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+  align-self: flex-end;
+}
+
+.services__cta-link:hover {
+  background: var(--navy);
+  color: #fff;
+}
+
+/* ── Grid ── */
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.services__card {
+  background: var(--white);
+  padding: 30px 26px;
+  border: 0.5px solid var(--border-sm);
+  border-top: 2.5px solid transparent;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background 0.22s ease, border-top-color 0.22s ease;
+}
+
+/* Orange top border slides in */
+.services__card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 2.5px;
+  background: var(--red);
+  transition: width 0.3s ease;
+}
+
+.services__card:hover::before  { width: 100%; }
+.services__card:hover          { background: var(--navy); }
+.services__card:hover .services__num,
+.services__card:hover .services__title { color: #fff; }
+.services__card:hover .services__desc  { color: rgba(255, 255, 255, 0.5); }
+.services__card:hover .services__more  { color: var(--orange); }
+.services__card:hover .services__icon svg { stroke: var(--orange); }
+
+.services__num {
+  font-size: 8px;
+  font-family: monospace;
+  color: var(--orange);
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  display: block;
+  transition: color 0.22s;
+}
+
+.services__icon {
+  margin-bottom: 16px;
+}
+
+.services__icon svg {
+  width: 26px;
+  height: 26px;
+  stroke: var(--navy);
+  stroke-width: 1.5;
+  fill: none;
+  transition: stroke 0.22s;
+}
+
+.services__title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 10px;
+  line-height: 1.3;
+  transition: color 0.22s;
+}
+
+.services__desc {
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.8;
+  transition: color 0.22s;
+}
+
+.services__more {
+  font-size: 9px;
+  color: var(--orange);
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  margin-top: 18px;
+  display: block;
+  transition: color 0.22s;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .services { padding: 64px 32px; }
+  .services__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .services { padding: 52px 20px; }
+  .services__header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .services__heading { font-size: 26px; }
+}
+
+@media (max-width: 540px) {
+  .services__grid { grid-template-columns: 1fr; }
+}
