@@ -115,3 +115,19 @@
   .footer__top { grid-template-columns: 1fr; }
   .footer__bottom { flex-direction: column; align-items: flex-start; }
 }
+.footer__link-btn {
+  background: none; border: none;
+  font-size: 12px; color: rgba(255,255,255,0.28);
+  cursor: pointer; font-family: var(--font-body);
+  padding: 0; text-align: left; transition: color 0.2s;
+}
+.footer__link-btn:hover { color: var(--orange); }
+
+.footer__quote-btn {
+  display: inline-block; margin-top: 18px;
+  background: var(--red); color: #fff;
+  font-family: var(--font-body); font-size: 10px;
+  font-weight: 700; letter-spacing: 2px; padding: 11px 20px;
+  transition: background 0.2s;
+}
+.footer__quote-btn:hover { background: #a8212a; }

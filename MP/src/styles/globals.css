@@ -1,8 +1,4 @@
-/* ================================================================
-   GLOBALS — Masterpattern Nig. Ltd.
-   Brand: Red #C0272D | Navy #0B1F3B | Orange #E8781A
-   Fonts: Playfair Display (headings) | DM Sans (body)
-================================================================ */
+
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
 
@@ -30,7 +26,15 @@
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body:    'DM Sans', system-ui, -apple-system, sans-serif;
 
-  /* ── Navbar heights (used in Hero padding-top) ── */
+  /* ── Font Size Scale ── */
+  --text-xs:   11px;   /* tags, badges, monospace labels     */
+  --text-sm:   13px;   /* small body, captions, nav links    */
+  --text-base: 15px;   /* default body text, card desc       */
+  --text-md:   16px;   /* slightly larger body paragraphs    */
+  --text-lg:   18px;   /* lead text, section intros          */
+  --text-xl:   20px;   /* subheadings                        */
+
+  /* ── Navbar heights ── */
   --navbar-h:        71px;
   --navbar-h-mobile: 63px;
 
@@ -41,10 +45,13 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--navbar-h);
+  font-size: 16px;
 }
 
 body {
   font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.7;
   background-color: var(--bg-2);
   color: var(--navy);
   -webkit-font-smoothing: antialiased;
@@ -56,3 +63,115 @@ img, svg { max-width: 100%; display: block; }
 button   { cursor: pointer; font-family: var(--font-body); }
 a        { text-decoration: none; color: inherit; }
 ul       { list-style: none; }
+
+/* ================================================================
+   GLOBAL TYPOGRAPHY OVERRIDES
+   Bumps font sizes across all components without editing
+   every individual CSS file. Adjust values here to tune the
+   whole site at once.
+================================================================ */
+
+/* ── Body / paragraph text ────────────────────────────────── */
+p {
+  font-size: var(--text-base);
+  line-height: 1.85;
+}
+
+/* ── Nav links ────────────────────────────────────────────── */
+.navbar__link         { font-size: 13px !important; }
+.navbar__dropdown-item { font-size: 13.5px !important; }
+.navbar__tel          { font-size: 12.5px !important; }
+.navbar__cta          { font-size: 12.5px !important; }
+
+/* ── Section body text ────────────────────────────────────── */
+.about__body,
+.svc-section__body,
+.abt-story__body,
+.abt-mv__body,
+.why__body,
+.hs__body,
+.hs-zero__body,
+.hs-hero__sub,
+.proj-hero__sub,
+.svc-hero__sub,
+.abt-hero__sub,
+.ctp-hero__sub,
+.qp-hero__sub         { font-size: var(--text-md) !important; line-height: 1.9 !important; }
+
+/* ── Card descriptions ────────────────────────────────────── */
+.services__desc,
+.hs-pillar__desc,
+.hs-protocol-card__item,
+.abt-values__card-desc,
+.svc-process__step-desc,
+.why__point-desc,
+.proj-cta__sub,
+.hs-cta__sub,
+.svc-cta__sub,
+.abt-cta__sub,
+.contact__sub,
+.ctp-info__sub,
+.ctp-form__sub,
+.qp-step__desc,
+.qp-sidebar__step-desc { font-size: 14px !important; line-height: 1.85 !important; }
+
+/* ── Services / projects card titles ─────────────────────── */
+.services__title       { font-size: 15.5px !important; }
+.proj-card__title      { font-size: 15px   !important; }
+.proj-card--featured .proj-card__title { font-size: 18px !important; }
+.hs-pillar__title,
+.abt-values__card-title,
+.abt-team__name        { font-size: 15.5px !important; }
+
+/* ── Contact / form items ─────────────────────────────────── */
+.contact__item-value,
+.ctp-info__value       { font-size: 14px !important; }
+.ctp-faq__q            { font-size: 15px !important; }
+.ctp-faq__a p          { font-size: 14px !important; }
+
+/* ── Stats ────────────────────────────────────────────────── */
+.stats__label,
+.why__stat-label,
+.proj-hero__stat-label { font-size: 14px  !important; letter-spacing: 2px !important; }
+.stats__suffix         { font-size: 30px !important; }
+
+/* ── Hero subtext ─────────────────────────────────────────── */
+.hero__sub             { font-size: 15.5px !important; }
+.hero__badge-text      { font-size: 11px   !important; }
+
+/* ── About list items ─────────────────────────────────────── */
+.about__list-item,
+.svc-section__feature-item,
+.hs__item,
+.hs-emergency__step    { font-size: 14px !important; }
+
+/* ── Footer ───────────────────────────────────────────────── */
+.footer__brand-desc    { font-size: 13px  !important; }
+.footer__links a,
+.footer__links li      { font-size: 13px  !important; }
+.footer__copy,
+.footer__policies a    { font-size: 11px  !important; }
+
+/* ── Ticker ───────────────────────────────────────────────── */
+.ticker__item          { font-size: 12px !important; }
+
+/* ── Why Us points ────────────────────────────────────────── */
+.why__point-title      { font-size: 15px  !important; }
+.why__point-desc       { font-size: 13.5px !important; }
+.why__body             { font-size: 15px  !important; }
+
+/* ── Health & Safety ──────────────────────────────────────── */
+.hs-emergency__step,
+.hs-protocol-card__item { font-size: 13.5px !important; }
+.hs-emergency__contact-note { font-size: 12.5px !important; }
+
+/* ── Quote form ───────────────────────────────────────────── */
+.qp-input              { font-size: 14px !important; }
+.qp-agree__text        { font-size: 13.5px !important; }
+.qp-review-value       { font-size: 14px !important; }
+.qp-sidebar__step-desc { font-size: 12.5px !important; }
+
+/* ── Contact form ─────────────────────────────────────────── */
+.ctp-form__input       { font-size: 14px !important; }
+.contact__body         { font-size: 14px !important; }
+

@@ -1,19 +1,16 @@
 /* ================================================================
    NAVBAR.CSS — Masterpattern Nig. Ltd.
+   Hover: Bechtel-style rounded capsule per item (dark + red border)
 ================================================================ */
 
-/* ── Base ────────────────────────────────────────────────────── */
 .navbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   z-index: var(--z-nav);
   background: transparent;
   transition: background 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease;
 }
 
-/* When scrolled — frosted glass */
 .navbar--scrolled {
   background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(12px);
@@ -35,7 +32,7 @@
   justify-content: space-between;
   height: 80px;
   padding: 0 48px;
-  gap: 40px;
+  gap: 32px;
   border-bottom: 0.5px solid transparent;
   transition: border-color 0.4s ease;
 }
@@ -44,11 +41,12 @@
   border-bottom-color: var(--border);
 }
 
-/* ── Logo Image ──────────────────────────────────────────────── */
+/* ── Logo ────────────────────────────────────────────────────── */
 .navbar__logo-wrap {
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  text-decoration: none;
 }
 
 .navbar__logo-img {
@@ -58,47 +56,199 @@
   display: block;
 }
 
-/* ── Desktop Nav Links ───────────────────────────────────────── */
+/* ════════════════════════════════════════════════════════════
+   DESKTOP LINKS — Bechtel-style capsule hover
+   Each link gets its OWN pill on hover, just like Bechtel's
+   "PROJECTS" button — dark navy fill + red border + white text
+════════════════════════════════════════════════════════════ */
+
 .navbar__links {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 6px;
   list-style: none;
   flex: 1;
   justify-content: center;
 }
 
-.navbar__link {
-  font-size: 11.5px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  color: var(--navy);            /* ← dark by default — readable on light hero */
+.navbar__item--has-dropdown {
   position: relative;
-  padding-bottom: 4px;
-  transition: color 0.25s ease;
-  white-space: nowrap;
 }
 
-.navbar__link::after {
+/* Base link style */
+.navbar__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--navy);
+  padding: 9px 18px;
+  border-radius: 50px;                      /* pill/capsule shape */
+  border: 1.5px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background   0.22s ease,
+    color        0.22s ease,
+    border-color 0.22s ease;
+}
+
+/* ── HOVER: dark navy fill + red border + white text ─────────
+   This is exactly the Bechtel "PROJECTS" pill effect          */
+.navbar__link:hover {
+  background: var(--navy);
+  color: #ffffff;
+  border-color: var(--red);
+}
+
+/* ── ACTIVE: same pill style as hover ─────────────────────── */
+.navbar__link--active {
+  background: var(--navy);
+  color: #ffffff;
+  border-color: var(--red);
+}
+
+/* Chevron icon beside Services */
+.navbar__link-chevron {
+  width: 10px;
+  height: 6px;
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: transform 0.22s ease;
+}
+
+.navbar__item--has-dropdown:hover .navbar__link-chevron {
+  transform: rotate(180deg);
+}
+
+/* ── SLIDESHOW MODE — transparent nav, dark bg behind it ─────
+   Invert to white pill + red border so it reads on dark overlay */
+.slideshow-active .navbar:not(.navbar--scrolled) .navbar__link {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.slideshow-active .navbar:not(.navbar--scrolled) .navbar__link:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border-color: var(--red);
+}
+
+.slideshow-active .navbar:not(.navbar--scrolled) .navbar__link--active {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border-color: var(--red);
+}
+
+.slideshow-active .navbar:not(.navbar--scrolled) .navbar__tel    { color: rgba(255,255,255,0.60); }
+.slideshow-active .navbar:not(.navbar--scrolled) .navbar__hb-line { background: #fff; }
+
+/* Scrolled state always uses dark */
+.slideshow-active .navbar--scrolled .navbar__link         { color: var(--navy); }
+.slideshow-active .navbar--scrolled .navbar__link:hover   { background: var(--navy); color: #fff; border-color: var(--red); }
+.slideshow-active .navbar--scrolled .navbar__link--active { background: var(--navy); color: #fff; border-color: var(--red); }
+.slideshow-active .navbar--scrolled .navbar__tel          { color: rgba(11,31,59,0.35); }
+.slideshow-active .navbar--scrolled .navbar__hb-line      { background: var(--navy); }
+
+/* ════════════════════════════════════════════════════════════
+   SERVICES DROPDOWN
+════════════════════════════════════════════════════════════ */
+
+.navbar__dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  background: var(--white);
+  border: 0.5px solid var(--border);
+  border-top: 2.5px solid var(--red);
+  box-shadow: 0 20px 48px rgba(11, 31, 59, 0.14);
+  min-width: 248px;
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.navbar__dropdown--open {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+/* Triangle pointer */
+.navbar__dropdown::before {
   content: '';
   position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--orange);
-  transition: width 0.25s ease;
+  top: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 6px;
+  background: var(--red);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 }
 
-.navbar__link:hover          { color: var(--red); }
-.navbar__link:hover::after,
-.navbar__link--active::after { width: 100%; }
-.navbar__link--active        { color: var(--red); }
+.navbar__dropdown-header {
+  font-size: 7.5px;
+  letter-spacing: 3px;
+  color: var(--orange);
+  font-family: monospace;
+  font-weight: 700;
+  padding: 14px 18px 8px;
+  border-bottom: 0.5px solid var(--border-sm);
+}
 
-/* Scrolled state — same dark colour, just now has bg behind it */
-.navbar--scrolled .navbar__link         { color: rgba(11, 31, 59, 0.55); }
-.navbar--scrolled .navbar__link:hover   { color: var(--navy); }
-.navbar--scrolled .navbar__link--active { color: var(--navy); }
+.navbar__dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 11px 18px;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(11, 31, 59, 0.7);
+  background: none;
+  border: none;
+  border-left: 2px solid transparent;
+  cursor: pointer;
+  font-family: var(--font-body);
+  text-align: left;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, padding-left 0.15s;
+}
+
+.navbar__dropdown-item:hover {
+  background: var(--bg);
+  color: var(--navy);
+  border-left-color: var(--orange);
+  padding-left: 22px;
+}
+
+.navbar__dropdown-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--orange);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.navbar__dropdown-arrow {
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+  color: var(--orange);
+  opacity: 0;
+  flex-shrink: 0;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.navbar__dropdown-item:hover .navbar__dropdown-arrow {
+  opacity: 1;
+  transform: translateX(3px);
+}
 
 /* ── Desktop Right ───────────────────────────────────────────── */
 .navbar__right {
@@ -110,23 +260,17 @@
 
 .navbar__tel {
   font-size: 11px;
-  color: rgba(11, 31, 59, 0.45);   /* ← dark by default */
+  color: rgba(11, 31, 59, 0.45);
   letter-spacing: 0.5px;
   font-family: monospace;
   white-space: nowrap;
   transition: color 0.4s ease;
 }
 
-.navbar--scrolled .navbar__tel {
-  color: rgba(11, 31, 59, 0.35);
-}
+.navbar--scrolled .navbar__tel { color: rgba(11, 31, 59, 0.35); }
+.navbar__tel strong { color: var(--red); font-weight: 700; }
 
-.navbar__tel strong {
-  color: var(--red);
-  font-weight: 700;
-}
-
-/* ── CTA Button ──────────────────────────────────────────────── */
+/* ── CTA ─────────────────────────────────────────────────────── */
 .navbar__cta {
   background: var(--red);
   color: #fff;
@@ -137,7 +281,8 @@
   padding: 11px 22px;
   border: none;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.1s ease;
+  border-radius: 4px;
+  transition: background 0.2s, transform 0.1s;
   white-space: nowrap;
 }
 
@@ -149,9 +294,10 @@
   padding: 14px;
   font-size: 11px;
   letter-spacing: 2.5px;
+  border-radius: 0;
 }
 
-/* ── Hamburger Button ────────────────────────────────────────── */
+/* ── Hamburger ───────────────────────────────────────────────── */
 .navbar__hamburger {
   display: none;
   flex-direction: column;
@@ -169,22 +315,15 @@
   display: block;
   width: 26px;
   height: 2px;
-  background: var(--navy);         /* ← dark by default — visible on light hero */
+  background: var(--navy);
   border-radius: 1px;
-  transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+  transition: transform 0.3s, opacity 0.3s, width 0.3s;
   transform-origin: center;
 }
 
-.navbar__hamburger--open .navbar__hb-line:nth-child(1) {
-  transform: translateY(8px) rotate(45deg);
-}
-.navbar__hamburger--open .navbar__hb-line:nth-child(2) {
-  opacity: 0;
-  width: 0;
-}
-.navbar__hamburger--open .navbar__hb-line:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
-}
+.navbar__hamburger--open .navbar__hb-line:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.navbar__hamburger--open .navbar__hb-line:nth-child(2) { opacity: 0; width: 0; }
+.navbar__hamburger--open .navbar__hb-line:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 /* ── Mobile Overlay ──────────────────────────────────────────── */
 .navbar__overlay {
@@ -194,21 +333,15 @@
   background: rgba(11, 31, 59, 0.45);
   z-index: 998;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s;
   pointer-events: none;
 }
-
-.navbar__overlay--show {
-  opacity: 1;
-  pointer-events: auto;
-}
+.navbar__overlay--show { opacity: 1; pointer-events: auto; }
 
 /* ── Mobile Drawer ───────────────────────────────────────────── */
 .navbar__drawer {
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
+  top: 0; right: 0; bottom: 0;
   width: min(340px, 88vw);
   background: var(--navy);
   z-index: 999;
@@ -220,13 +353,11 @@
   overscroll-behavior: contain;
 }
 
-.navbar__drawer--open {
-  transform: translateX(0);
-}
+.navbar__drawer--open { transform: translateX(0); }
 
 .navbar__drawer-logo {
   padding: 64px 32px 30px;
-  border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 0.5px solid rgba(255,255,255,0.08);
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -240,14 +371,13 @@
   line-height: 1;
 }
 
-.navbar__drawer-brand-master   { color: rgba(255, 255, 255, 0.9); }
+.navbar__drawer-brand-master   { color: rgba(255,255,255,0.9); }
 .navbar__drawer-brand-parttern { color: var(--red); }
 
 .navbar__drawer-brand-sub {
-  color: rgba(255, 255, 255, 0.22);
+  color: rgba(255,255,255,0.22);
   font-size: 8px;
   letter-spacing: 5px;
-  font-weight: 500;
 }
 
 .navbar__drawer-links {
@@ -261,30 +391,28 @@
   align-items: center;
   gap: 18px;
   padding: 17px 32px;
+  width: 100%;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 2px;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255,255,255,0.5);
   border-left: 2px solid transparent;
+  background: none;
+  border-right: none; border-top: none; border-bottom: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  text-align: left;
   opacity: 0;
   transform: translateX(20px);
-  transition:
-    color        0.2s  ease,
-    background   0.2s  ease,
-    border-color 0.2s  ease,
-    opacity      0.3s  ease,
-    transform    0.35s ease;
+  transition: color 0.2s, background 0.2s, border-color 0.2s, opacity 0.3s, transform 0.35s;
 }
 
-.navbar__drawer--open .navbar__drawer-link {
-  opacity: 1;
-  transform: translateX(0);
-}
+.navbar__drawer--open .navbar__drawer-link { opacity: 1; transform: translateX(0); }
 
 .navbar__drawer-link:hover,
 .navbar__drawer-link--active {
   color: var(--white);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255,255,255,0.04);
   border-left-color: var(--orange);
 }
 
@@ -293,13 +421,11 @@
   font-size: 11px;
   color: var(--orange);
   font-weight: 700;
-  letter-spacing: 1px;
-  flex-shrink: 0;
 }
 
 .navbar__drawer-footer {
   padding: 28px 32px 48px;
-  border-top: 0.5px solid rgba(255, 255, 255, 0.08);
+  border-top: 0.5px solid rgba(255,255,255,0.08);
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -310,59 +436,23 @@
   font-size: 17px;
   color: var(--orange);
   font-weight: 700;
-  letter-spacing: 1px;
   text-decoration: none;
+  letter-spacing: 1px;
 }
 
-/* ================================================================
+/* ════════════════════════════════════════════════════════════
    RESPONSIVE
-================================================================ */
+════════════════════════════════════════════════════════════ */
 
 @media (max-width: 1023px) {
   .navbar__hamburger { display: flex; }
   .navbar__overlay   { display: block; }
   .navbar__links     { display: none; }
   .navbar__right     { display: none; }
-
-  .navbar__inner {
-    padding: 0 24px;
-    gap: 0;
-  }
+  .navbar__inner     { padding: 0 24px; gap: 0; }
 }
 
 @media (max-width: 767px) {
   .navbar__inner    { height: 68px; }
   .navbar__logo-img { height: 46px; }
 }
-
-/* ================================================================
-   SLIDESHOW MODE — body.slideshow-active is toggled by Hero.jsx
-   Only applies when navbar is transparent (not scrolled)
-================================================================ */
-
-/* Links → white over dark slideshow overlay */
-.slideshow-active .navbar:not(.navbar--scrolled) .navbar__link {
-  color: rgba(255, 255, 255, 0.88);
-}
-
-.slideshow-active .navbar:not(.navbar--scrolled) .navbar__link:hover,
-.slideshow-active .navbar:not(.navbar--scrolled) .navbar__link--active {
-  color: #ffffff;
-}
-
-/* Phone number → white */
-.slideshow-active .navbar:not(.navbar--scrolled) .navbar__tel {
-  color: rgba(255, 255, 255, 0.60);
-}
-
-/* Hamburger lines → white */
-.slideshow-active .navbar:not(.navbar--scrolled) .navbar__hb-line {
-  background: #ffffff;
-}
-
-/* If user somehow scrolls during slideshow — revert to dark */
-.slideshow-active .navbar--scrolled .navbar__link         { color: rgba(11, 31, 59, 0.55); }
-.slideshow-active .navbar--scrolled .navbar__link:hover   { color: var(--navy); }
-.slideshow-active .navbar--scrolled .navbar__link--active { color: var(--navy); }
-.slideshow-active .navbar--scrolled .navbar__tel          { color: rgba(11, 31, 59, 0.35); }
-.slideshow-active .navbar--scrolled .navbar__hb-line      { background: var(--navy); }

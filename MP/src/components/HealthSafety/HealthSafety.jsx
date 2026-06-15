@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './HealthSafety.css';
 
 const ITEMS = [
@@ -11,8 +12,7 @@ const ITEMS = [
 
 const HealthSafety = () => (
   <section className="hs" id="health-safety">
-
-    {/* ── Left ── */}
+    {/* Left */}
     <div className="hs__left">
       <div className="hs__tag">
         <span className="hs__tag-line"/>
@@ -26,10 +26,11 @@ const HealthSafety = () => (
         (HSE) framework — protecting our workers, clients, and surrounding communities
         at every stage of construction.
       </p>
-      <a href="#contact" className="hs__btn">READ SAFETY POLICY</a>
+      {/* ← Routes to the dedicated Health & Safety page */}
+      <Link to="/health-safety" className="hs__btn">READ SAFETY POLICY</Link>
     </div>
 
-    {/* ── Right ── */}
+    {/* Right */}
     <div className="hs__right">
       <ul className="hs__list">
         {ITEMS.map(item => (

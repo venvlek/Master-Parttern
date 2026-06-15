@@ -1,0 +1,494 @@
+/* ================================================================
+   SERVICESPAGE.CSS — Masterpattern Nig. Ltd.
+================================================================ */
+
+.svc-page {
+  padding-top: var(--navbar-h);
+}
+
+/* ════════════════════════════════════════════════════════════
+   HERO
+════════════════════════════════════════════════════════════ */
+
+.svc-hero {
+  position: relative;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.svc-hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.svc-hero__content {
+  position: relative;
+  z-index: 2;
+  padding: 72px 52px;
+  max-width: 800px;
+}
+
+.svc-hero__crumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  font-family: monospace;
+  letter-spacing: 0.5px;
+}
+
+.svc-hero__crumb-link {
+  color: var(--orange);
+  transition: color 0.2s;
+}
+
+.svc-hero__crumb-link:hover { color: #fff; }
+
+.svc-hero__tag {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.svc-hero__tag-line {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--orange);
+}
+
+.svc-hero__tag-text {
+  font-size: 8px;
+  letter-spacing: 3.5px;
+  color: var(--orange);
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.svc-hero__heading {
+  font-family: var(--font-display);
+  font-size: 52px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+  margin-bottom: 20px;
+}
+
+.svc-hero__heading em {
+  color: var(--orange);
+  font-style: italic;
+}
+
+.svc-hero__sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.85;
+  max-width: 540px;
+  margin-bottom: 40px;
+}
+
+/* Quick-nav links to each section */
+.svc-hero__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.svc-hero__quick-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.6);
+  border: 0.5px solid rgba(255,255,255,0.18);
+  padding: 8px 16px;
+  border-radius: 50px;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  text-decoration: none;
+}
+
+.svc-hero__quick-link:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  border-color: rgba(255,255,255,0.45);
+}
+
+.svc-hero__quick-num {
+  font-family: monospace;
+  font-size: 8px;
+  color: var(--orange);
+  font-weight: 700;
+}
+
+/* ════════════════════════════════════════════════════════════
+   SERVICE SECTIONS — alternating split
+════════════════════════════════════════════════════════════ */
+
+.svc-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 520px;
+  scroll-margin-top: 83px;     /* offset for fixed navbar */
+}
+
+/* Reverse: content left, visual right */
+.svc-section--reverse .svc-section__visual  { order: 2; }
+.svc-section--reverse .svc-section__content { order: 1; }
+
+/* Alternating background on content panel */
+.svc-section:nth-child(odd)  .svc-section__content { background: var(--white); }
+.svc-section:nth-child(even) .svc-section__content { background: var(--bg); }
+
+/* Visual panel */
+.svc-section__visual {
+  position: relative;
+  overflow: hidden;
+  min-height: 460px;
+}
+
+.svc-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Content panel */
+.svc-section__content {
+  padding: 72px 52px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Section tag row */
+.svc-section__tag {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.svc-section__num {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 900;
+  color: rgba(11, 31, 59, 0.08);
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.svc-section__divider {
+  display: block;
+  width: 1px;
+  height: 32px;
+  background: var(--border);
+}
+
+.svc-section__tag-text {
+  font-size: 7.5px;
+  letter-spacing: 3px;
+  color: var(--orange);
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.svc-section__heading {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--navy);
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+  line-height: 1.15;
+}
+
+.svc-section__subtitle {
+  font-size: 11.5px;
+  color: var(--orange);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
+  font-family: monospace;
+}
+
+.svc-section__body {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.9;
+  margin-bottom: 14px;
+}
+
+/* Features list */
+.svc-section__features {
+  margin: 20px 0 28px;
+}
+
+.svc-section__features-label {
+  font-size: 7.5px;
+  letter-spacing: 3px;
+  color: var(--orange);
+  font-weight: 700;
+  font-family: monospace;
+  margin-bottom: 14px;
+}
+
+.svc-section__feature-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.svc-section__feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12.5px;
+  color: var(--navy);
+  font-weight: 500;
+}
+
+.svc-section__feature-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--red);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.svc-section__cta {
+  display: inline-block;
+  background: var(--navy);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 13px 26px;
+  width: fit-content;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.svc-section__cta:hover { background: #061528; }
+
+/* ════════════════════════════════════════════════════════════
+   HOW WE WORK — PROCESS
+════════════════════════════════════════════════════════════ */
+
+.svc-process {
+  background: var(--dark);
+  padding: 88px 52px;
+}
+
+.svc-process__header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.svc-process__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.svc-process__tag-line {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: var(--orange);
+}
+
+.svc-process__tag-text {
+  font-size: 8px;
+  letter-spacing: 3.5px;
+  color: var(--orange);
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.svc-process__heading {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+}
+
+.svc-process__heading span { color: var(--orange); }
+
+.svc-process__sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  max-width: 380px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+.svc-process__steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+}
+
+.svc-process__step {
+  padding: 0 32px;
+  border-right: 0.5px solid rgba(255,255,255,0.07);
+  position: relative;
+}
+
+.svc-process__step:last-child { border-right: none; }
+.svc-process__step:first-child { padding-left: 0; }
+
+.svc-process__step-num {
+  font-family: var(--font-display);
+  font-size: 52px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.06);
+  line-height: 1;
+  letter-spacing: -2px;
+  margin-bottom: 16px;
+}
+
+.svc-process__step-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 12px;
+  letter-spacing: -0.2px;
+}
+
+.svc-process__step-line {
+  position: absolute;
+  top: 28px;
+  right: -1px;
+  width: 1px;
+  height: 24px;
+  background: var(--orange);
+  opacity: 0.5;
+}
+
+.svc-process__step-desc {
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.8;
+}
+
+/* ════════════════════════════════════════════════════════════
+   CTA SECTION
+════════════════════════════════════════════════════════════ */
+
+.svc-cta {
+  background: var(--red);
+  padding: 88px 52px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.svc-cta__deco {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-size: 160px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.04);
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: -5px;
+}
+
+.svc-cta__content { position: relative; z-index: 2; }
+
+.svc-cta__heading {
+  font-family: var(--font-display);
+  font-size: 44px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+
+.svc-cta__sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 36px;
+  line-height: 1.8;
+}
+
+.svc-cta__actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.svc-cta__btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 14px 30px;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.svc-cta__btn--white {
+  background: #fff;
+  color: var(--red);
+}
+
+.svc-cta__btn--white:hover { background: var(--bg); }
+
+.svc-cta__btn--outline {
+  background: transparent;
+  color: rgba(255,255,255,0.85);
+  border: 0.5px solid rgba(255,255,255,0.35);
+}
+
+.svc-cta__btn--outline:hover { background: rgba(255,255,255,0.1); }
+
+/* ════════════════════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  .svc-page { padding-top: var(--navbar-h-mobile); }
+  .svc-section { grid-template-columns: 1fr; }
+  .svc-section--reverse .svc-section__visual,
+  .svc-section--reverse .svc-section__content { order: unset; }
+  .svc-section__visual  { min-height: 320px; order: 1; }
+  .svc-section__content { order: 2; padding: 52px 32px; }
+  .svc-process__steps { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .svc-process__step { border-right: none; padding: 0; border-bottom: 0.5px solid rgba(255,255,255,0.07); padding-bottom: 28px; }
+  .svc-process__step:last-child { border-bottom: none; }
+  .svc-process__step-line { display: none; }
+}
+
+@media (max-width: 768px) {
+  .svc-hero__content { padding: 56px 24px; }
+  .svc-hero__heading  { font-size: 36px; }
+  .svc-section__content { padding: 44px 20px; }
+  .svc-section__heading { font-size: 26px; }
+  .svc-process,
+  .svc-cta { padding: 56px 20px; }
+  .svc-process__steps { grid-template-columns: 1fr; }
+  .svc-cta__heading { font-size: 32px; }
+}
