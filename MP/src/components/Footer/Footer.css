@@ -22,8 +22,8 @@
   margin-bottom: 4px;
 }
 
-.footer__master    { color: rgba(255, 255, 255, 0.9); }
-.footer__parttern  { color: var(--red); }
+.footer__master    { color: var(--red); }
+.footer__parttern  { color: var(--blue); }
 
 .footer__brand-sub {
   display: block;

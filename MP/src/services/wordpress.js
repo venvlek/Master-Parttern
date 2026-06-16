@@ -4,7 +4,7 @@
    VITE_WP_URL=https://public-api.wordpress.com/wp/v2/sites/yoursite.wordpress.com
 ================================================================ */
 
-const WP_BASE = import.meta.env.VITE_WP_URL || '';
+const WP_BASE = 'https://public-api.wordpress.com/wp/v2/sites/masterpatternnews.wordpress.com';
 
 /* ── Helpers ─────────────────────────────────────────────────── */
 

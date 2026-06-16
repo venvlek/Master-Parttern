@@ -155,11 +155,14 @@
   min-height: 460px;
 }
 
-.svc-svg {
+.svc-svg,
+.svc-section__photo {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* Content panel */

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Stats from '../../components/Stats/Stats';
+import dpOlaotan from '../../assets/dp olaotan.jpeg';
+import oneImg from '../../assets/one.jpeg';
 import './AboutPage.css';
 
 /* ── Data ──────────────────────────────────────────────────── */
@@ -47,10 +49,10 @@ const VALUES = [
 ];
 
 const TEAM = [
-  { name: 'Project Director',    role: 'Leadership & Strategy'    },
-  { name: 'Civil Engineer',       role: 'Structural & Civil Works'  },
-  { name: 'Site Supervisor',      role: 'On-site Execution'         },
-  { name: 'Electrical Engineer',  role: 'Power & Installation'      },
+  { name: 'Enikonologbon Olaotan', role: 'Project Director',        image: dpOlaotan },
+  { name: 'Civil Engineer',        role: 'Structural & Civil Works' },
+  { name: 'Site Supervisor',       role: 'On-site Execution'        },
+  { name: 'Electrical Engineer',   role: 'Power & Installation'     },
 ];
 
 /* ── Component ─────────────────────────────────────────────── */
@@ -143,49 +145,7 @@ const AboutPage = () => {
         </div>
 
         <div className="abt-story__visual">
-          <svg width="100%" height="100%" viewBox="0 0 480 520"
-            preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-            <rect width="480" height="520" fill="#0B1F3B"/>
-            <g stroke="#E8781A" strokeWidth="0.4" opacity="0.12">
-              {Array.from({ length: 10 }, (_, i) => <line key={`v${i}`} x1={i*48} y1="0" x2={i*48} y2="520"/>)}
-              {Array.from({ length: 12 }, (_, i) => <line key={`h${i}`} x1="0" y1={i*44} x2="480" y2={i*44}/>)}
-            </g>
-            {/* Main building */}
-            <rect x="120" y="60" width="160" height="440" fill="#071A30" stroke="rgba(232,120,26,0.45)" strokeWidth="1.2"/>
-            <rect x="120" y="60" width="160" height="4"   fill="#C0272D" opacity="0.9"/>
-            {[78,102,126,150,174,198,222,246,270,294,318,342,366,390,414,438].map((y, ri) =>
-              [132,150,168,186,204,222,240,258].map((x, ci) => (
-                <rect key={`${ri}${ci}`} x={x} y={y} width="12" height="15" rx="1"
-                  fill={`rgba(232,120,26,${(ri + ci) % 3 === 0 ? 0.55 : (ri + ci) % 3 === 1 ? 0.25 : 0.15})`}/>
-              ))
-            )}
-            <rect x="142" y="418" width="56" height="82" rx="1" fill="rgba(192,39,45,0.45)"/>
-            {/* Left building */}
-            <rect x="22"  y="200" width="88" height="300" fill="#061020" stroke="rgba(192,39,45,0.3)" strokeWidth="0.8"/>
-            <rect x="22"  y="200" width="88" height="3"   fill="#E8781A" opacity="0.7"/>
-            {[214,236,258,280,302,324,346,368,390,412,434,456].map((y, ri) =>
-              [32,50,68,86,100].map((x, ci) => (
-                <rect key={`l${ri}${ci}`} x={x} y={y} width="10" height="13" rx="1"
-                  fill={`rgba(232,120,26,${(ri * ci) % 2 === 0 ? 0.5 : 0.2})`}/>
-              ))
-            )}
-            {/* Right building */}
-            <rect x="296" y="240" width="80" height="260" fill="#050F1C" stroke="rgba(255,255,255,0.06)" strokeWidth="0.5"/>
-            {/* Crane */}
-            <rect x="206" y="18"  width="4" height="44" fill="#666"/>
-            <rect x="110" y="22"  width="176" height="3" fill="#666"/>
-            <line x1="110" y1="24" x2="208" y2="62" stroke="#777" strokeWidth="1.5"/>
-            <rect x="278" y="14"  width="16" height="20" rx="1" fill="#C0272D" opacity="0.8"/>
-            {/* Scaffold */}
-            <line x1="118" y1="62" x2="118" y2="500" stroke="rgba(255,255,255,0.1)" strokeWidth="4"/>
-            <line x1="282" y1="62" x2="282" y2="500" stroke="rgba(255,255,255,0.1)" strokeWidth="4"/>
-            {[140,200,260,320,380,440].map(y => (
-              <line key={y} x1="115" y1={y} x2="285" y2={y} stroke="rgba(255,255,255,0.07)" strokeWidth="2"/>
-            ))}
-            {/* Ground */}
-            <rect x="0" y="498" width="480" height="22" fill="#040C18"/>
-            <rect x="0" y="496" width="480" height="4"  fill="#E8781A" opacity="0.5"/>
-          </svg>
+          <img src={oneImg} alt="Masterpattern construction site" className="abt-story__photo" />
         </div>
       </section>
 
@@ -268,14 +228,17 @@ const AboutPage = () => {
         </div>
 
         <div className="abt-team__grid">
-          {TEAM.map(({ name, role }) => (
+          {TEAM.map(({ name, role, image }) => (
             <div className="abt-team__card" key={name}>
-              {/* Avatar placeholder */}
-              <div className="abt-team__avatar" aria-hidden="true">
-                <svg viewBox="0 0 80 80" fill="none">
-                  <circle cx="40" cy="30" r="18" fill="rgba(11,31,59,0.15)"/>
-                  <path d="M10 75c0-16.6 13.4-30 30-30s30 13.4 30 30" fill="rgba(11,31,59,0.1)"/>
-                </svg>
+              <div className="abt-team__avatar">
+                {image ? (
+                  <img src={image} alt={name} className="abt-team__avatar-img" />
+                ) : (
+                  <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                    <circle cx="40" cy="30" r="18" fill="rgba(11,31,59,0.15)"/>
+                    <path d="M10 75c0-16.6 13.4-30 30-30s30 13.4 30 30" fill="rgba(11,31,59,0.1)"/>
+                  </svg>
+                )}
               </div>
               <h3 className="abt-team__name">{name}</h3>
               <p className="abt-team__role">{role}</p>

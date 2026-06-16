@@ -195,6 +195,15 @@
   overflow: hidden;
 }
 
+.abt-story__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 /* ════════════════════════════════════════════════════════════
    MISSION & VISION
 ════════════════════════════════════════════════════════════ */
@@ -454,6 +463,13 @@
 .abt-team__avatar svg {
   width: 100%;
   height: 100%;
+}
+
+.abt-team__avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .abt-team__name {
